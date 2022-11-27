@@ -1,0 +1,14 @@
+{
+	"windowSize": 2,
+	"isFullscreen": false,
+	"enableVSync": true,
+	"fpsLimit": 0,
+	"language": "English",
+	"theme": "New",
+	"layout": "Standard",
+	"musicVolume": 49.3007,
+	"soundVolume": 50,
+	"usePrettyPrinting": true,
+	"useTabs": true,
+	"defaultFileLocation": "Saved"
+}

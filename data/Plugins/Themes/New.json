@@ -1,0 +1,482 @@
+{
+    "loadingScreen": "Default/Default/Loading.png",
+    "icon": "Default/Shared/Icon.png",
+    "toggleAnimations": true,
+
+    "shaders": 
+    {
+        "hovering": { "fragment": "Default/Shared/hsv_adjust.frag", "u_adjustmentFactor": [ 1.1, 1.1, 1.1 ] },
+        "disabled": { "fragment": "Default/Shared/grayscale.frag" },
+        "disabledHovering": { "fragment": "Default/Shared/grayscale_hsv_adjust.frag", "u_adjustmentFactor": [ 1.1, 1.1, 1.1 ] }
+    },
+
+    "fonts":
+    {
+        "menu_buttons": "Default/Shared/HouseOfTerror.ttf",
+        "main": "Default/Shared/BrianneTod.ttf",
+        "labels": "Default/Shared/AshleyScriptMtStd.ttf",
+        "credits": "Default/Shared/fbUsv8C5el.ttf"
+    },
+    
+    "textures":
+    {
+        "title_screen": "Default/Default/Title_Screen.png",
+        "title_screen_static": "Default/Default/Title_Screen_Static.png",
+        "logo": "Default/Default/Logo.png",
+        "main_editor": "Default/Shared/Editor_Background.png",
+        "main_editor_top": "Default/Shared/Editor_Background_Top.png",
+        "extras": "Default/Default/Extras.png",
+        "settings": "Default/Shared/Settings.png",
+        "credits": "Default/Shared/Credits.png",
+        "ui": "Default/Default/UI.png"
+    },
+
+    "sounds":
+    {
+        "check_box": "Default/Shared/Tick.wav",
+        "menu_button_hover": "Default/Default/Menu_Bleep.wav",
+        "menu_button_click": "Default/Shared/Menu_Hold.wav",
+        "menu_button_release": "Default/Shared/Menu_Release.wav",
+        "title_close": "Default/Shared/Close.wav",
+        "credits_back": "Default/Shared/Back.wav",
+        "slider_release": "Default/Shared/Slider_Release.wav",
+        "combo_box_switch": "Default/Shared/Combo_Switch.wav",
+        "typing": "Default/Shared/Typing.wav"
+    },
+    
+    "music":
+    {
+        "title_screen": "Default/Default/Title_Screen.ogg",
+        "main_editor": "Default/Shared/Main_Editor.wav",
+        "extras": "Default/Shared/Extras.wav",
+        "settings": "Default/Shared/Settings.flac",
+        "credits": "Default/Shared/Credits.ogg"
+    },
+
+    "controlThemes": 
+    {
+        "logo": 
+        {
+            "texture": "logo"
+        },
+
+        "title_screen_static":
+        {
+            "texture": "title_screen_static"
+        },
+
+        "main_editor_top": 
+        {
+            "texture": "main_editor_top"
+        },
+
+        "title_screen": 
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering",
+            "enterSound": "menu_button_hover",
+            "clickSound": "menu_button_click",
+            "releaseSound": "menu_button_release"
+        },
+
+        "title_close": 
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering",
+            "clickSound": "title_close",
+            "releaseSound": "title_close"
+        },
+
+        "extras": 
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering",
+            "releaseSound": "menu_button_release"
+        },
+
+        "credits_back": 
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering",
+            "clickSound": "credits_back",
+            "releaseSound": "credits_back"
+        },
+
+        "slider":
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering",
+            "releaseSound": "slider_release"
+        },
+
+        "check_box":
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering",
+            "disabledShader": "disabled",
+            "disabledHoveringShader": "disabledHovering",
+            "clickSound": "check_box"
+        },
+
+        "clickable_control":
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering",
+            "disabledShader": "disabled",
+            "disabledHoveringShader": "disabledHovering",
+            "clickSound": "combo_box_switch"
+        },
+
+        "default": 
+        {
+            "texture": "ui",
+            "hoveringShader": "hovering"
+        },
+        
+        "default_no_hover": 
+        {
+            "texture": "ui"
+        }
+    },
+
+    "textThemes": 
+    {
+        "new_level": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "menu_buttons",
+
+            "fillDefaultColor": { "r": 143, "g": 123, "b": 255, "a": 255 },
+            "outlineDefaultColor": { "r": 9, "g": 14, "b": 69, "a": 255 },
+
+            "fillHoldingColor": { "r": 0, "g": 112, "b": 204, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 40, "b": 204, "a": 255 },
+
+            "fillHoveringColor": { "r": 0, "g": 140, "b": 255, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 47, "b": 255, "a": 255 },
+
+            "fillDisabledColor": { "r": 153, "g": 153, "b": 153, "a": 255 },
+            "outlineDisabledColor": { "r": 64, "g": 64, "b": 64, "a": 255 },
+
+            "characterSize": 65,
+            "letterSpacing": 1.5,
+            "lineSpacing": 0,
+            "outlineThickness": 3,
+            "style": 0
+        },
+
+        "open_level": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "menu_buttons",
+
+            "fillDefaultColor": { "r": 146, "g": 197, "b": 27, "a": 255 },
+            "outlineDefaultColor": { "r": 56, "g": 0, "b": 153, "a": 255 },
+
+            "fillHoveringColor": { "r": 0, "g": 255, "b": 93, "a": 255 },
+            "outlineHoveringColor": { "r": 95, "g": 0, "b": 255, "a": 255 },
+
+            "fillHoldingColor": { "r": 0, "g": 204, "b": 71, "a": 255 },
+            "outlineHoldingColor": { "r": 75, "g": 0, "b": 205, "a": 255 },
+
+            "fillDisabledColor": { "r": 153, "g": 153, "b": 153, "a": 255 },
+            "outlineDisabledColor": { "r": 64, "g": 64, "b": 64, "a": 255 },
+
+            "characterSize": 65,
+            "letterSpacing": 1.5,
+            "lineSpacing": 0,
+            "outlineThickness": 3,
+            "style": 0
+        },
+        
+        "extra": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "menu_buttons",
+            "fillDefaultColor": { "r": 255, "g": 127, "b": 48, "a": 255 },
+            "fillHoveringColor": { "r": 255, "g": 182, "b": 0, "a": 255 },
+            "fillHoldingColor": { "r": 204, "g": 142, "b": 0, "a": 255 },
+            "fillDisabledColor": { "r": 153, "g": 153, "b": 153, "a": 255 },
+            "outlineDefaultColor": { "r": 98, "g": 28, "b": 25, "a": 255 },
+            "outlineHoveringColor": { "r": 255, "g": 115, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 175, "g": 70, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 64, "g": 64, "b": 64, "a": 255 },
+            "characterSize": 65,
+            "letterSpacing": 1.5,
+            "lineSpacing": 0,
+            "outlineThickness": 3,
+            "style": 0
+        },
+
+        "main_editor_label":
+        {
+            "horizontalAlignment": "Left",
+            "verticalAlignment": "Center",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillDisabledColor": { "r": 58, "g": 58, "b": 58, "a": 255 },
+            "fillHoldingColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillHoveringColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 58, "g": 58, "b": 58, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 35,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 0,
+            "style": 0
+        },
+
+        "main_editor_label2":
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillDisabledColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoldingColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoveringColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 45,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 2,
+            "style": 0
+        },
+
+        "main_editor_label3":
+        {
+            "horizontalAlignment": "Left",
+            "verticalAlignment": "Center",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillDisabledColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoldingColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoveringColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 40,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 2,
+            "style": 0
+        },
+
+        "editor_input_field": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillDisabledColor": { "r": 58, "g": 58, "b": 58, "a": 255 },
+            "fillHoldingColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillHoveringColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 35,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 0,
+            "style": 0
+        },
+
+        "extra_label":
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "main",
+
+            "fillDefaultColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "fillDisabledColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoldingColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoveringColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 65,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 1.5,
+            "style": 0
+        },
+        
+        "settings_header": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 253, "g": 220, "b": 103, "a": 255 },
+            "fillDisabledColor": { "r": 253, "g": 220, "b": 103, "a": 255 },
+            "fillHoldingColor": { "r": 253, "g": 220, "b": 103, "a": 255 },
+            "fillHoveringColor": { "r": 253, "g": 220, "b": 103, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 85,
+            "letterSpacing": 1.5,
+            "lineSpacing": 0,
+            "outlineThickness": 3,
+            "style": 0
+        },
+
+        "settings_label": 
+        {
+            "horizontalAlignment": "Left",
+            "verticalAlignment": "Center",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillDisabledColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillHoldingColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillHoveringColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 50,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 0,
+            "style": 0
+        },
+
+        "credits_large_label": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Top",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 145, "g": 220, "b": 50, "a": 255 },
+            "fillDisabledColor": { "r": 145, "g": 220, "b": 50, "a": 255 },
+            "fillHoldingColor":{ "r": 145, "g": 220, "b": 50, "a": 255 },
+            "fillHoveringColor": { "r": 145, "g": 220, "b": 50, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 70,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 3,
+            "style": 0
+        },
+
+        "credits_small_label": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Top",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "fillDisabledColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoldingColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+            "fillHoveringColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 40,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 2,
+            "style": 0
+        },
+
+        "clickable_control": 
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "credits",
+
+            "fillDefaultColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillDisabledColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillHoldingColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+            "fillHoveringColor": { "r": 72, "g": 62, "b": 0, "a": 255 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+
+            "characterSize": 50,
+            "letterSpacing": 1,
+            "lineSpacing": 0,
+            "outlineThickness": 0,
+            "style": 0
+        },
+
+        "empty":
+        {
+            "horizontalAlignment": "Center",
+            "verticalAlignment": "Center",
+            "font": "main",
+
+            "fillDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "fillDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "fillHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 0 },
+            "fillHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 0 },
+
+            "outlineDefaultColor": { "r": 0, "g": 0, "b": 0, "a": 0 },
+            "outlineDisabledColor": { "r": 0, "g": 0, "b": 0, "a": 0 },
+            "outlineHoldingColor": { "r": 0, "g": 0, "b": 0, "a": 0 },
+            "outlineHoveringColor": { "r": 0, "g": 0, "b": 0, "a": 0 },
+
+            "characterSize": 0,
+            "letterSpacing": 0,
+            "lineSpacing": 0,
+            "outlineThickness": 0,
+            "style": 0
+        }
+    },
+
+    "inputControlThemes": 
+    {
+        "default":
+        {
+            "mouseCursorDefault": "Arrow",
+            "mouseCursorText": "Text",
+            "cursorWidth": 3,
+            "cursorColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
+            "selectionColor": { "r": 63, "g": 127, "b": 255, "a": 127 },
+            "inputSound": "typing"
+        }
+    }
+}
