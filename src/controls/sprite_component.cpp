@@ -70,4 +70,4 @@ void SpriteComponent::draw(sf::RenderTarget& target, sf::RenderStates states) co
 	target.draw(*this->m_sprite_current, states);
 }
 
-}
+} //namespace le
