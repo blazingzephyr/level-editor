@@ -65,7 +65,7 @@ public:
 	/// \param use_alt true to use the alternative sprite, false to use the default one.
 	///
 	////////////////////////////////////////////////////////////
-	void								setUseAlt(bool use_alt);
+	void setUseAlt(bool use_alt);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Draw this SpriteComponent to a render target.
@@ -74,17 +74,17 @@ public:
 	/// \param states Current render states
 	///
 	////////////////////////////////////////////////////////////
-	void								draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
 
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	std::shared_ptr<const sf::Sprite> m_sprite_current;  //!< Shared pointer to the currenly used sprite. The object pointed by this shall not be modified.
-	sf::Sprite                        m_sprite_default;	 //!< Default sprite
-	std::optional<sf::Sprite>         m_sprite_alt;		 //!< Optional alternative sprite. Is initialized only if the corresponding sf::IntRect was provided
-	bool                              m_use_alt;         //!< Indicates whether to use the alternative sprite or not
+	std::shared_ptr<const sf::Sprite> m_sprite_current; //!< Shared pointer to the currenly used sprite. The object pointed by this shall not be modified.
+	sf::Sprite                        m_sprite_default; //!< Default sprite
+	std::optional<sf::Sprite>         m_sprite_alt;     //!< Optional alternative sprite. Is initialized only if the corresponding sf::IntRect was provided
+	bool                              m_use_alt;        //!< Indicates whether to use the alternative sprite or not
 };
 
 } //namespace le
