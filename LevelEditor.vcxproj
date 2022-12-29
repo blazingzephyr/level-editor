@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\controls\sprite_component.cpp" />
+    <ClCompile Include="src\controls\text_component.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\controls\sprite_component.hpp" />
+    <ClInclude Include="src\controls\text_component.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -190,9 +198,6 @@ copy $(ProjectDir)\bin\$(Configuration)\sfml-system-2.dll $(SolutionDir)$(Platfo
 copy $(ProjectDir)\bin\$(Configuration)\sfml-window-2.dll $(SolutionDir)$(Platform)\$(Configuration)\sfml-window-2.dll</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="src\WinMain.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
