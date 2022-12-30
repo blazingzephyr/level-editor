@@ -19,15 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\controls\sprite_component.cpp" />
-    <ClCompile Include="src\controls\text_component.cpp" />
-    <ClCompile Include="src\themes\text_style.hpp">
+    <ClCompile Include="src\controls\components\sprite_component.cpp" />
+    <ClCompile Include="src\controls\components\text_component.cpp" />
+    <ClCompile Include="src\controls\styling\text_style.hpp">
       <FileType>CppHeader</FileType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\controls\sprite_component.hpp" />
-    <ClInclude Include="src\controls\text_component.hpp" />
+    <ClInclude Include="src\controls\components\sprite_component.hpp" />
+    <ClInclude Include="src\controls\components\text_component.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
