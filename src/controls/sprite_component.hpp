@@ -48,24 +48,34 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief SpriteComponent without the alternative sprite
 	///
+    /// \param position  Position set to sprite
+	/// \param texture   Source texture
+	/// \param rectangle Sub-rectangle of the texture to assign to the sprite
+	/// 
 	////////////////////////////////////////////////////////////
-	SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture_pointer, const sf::IntRect& sprite);
+	SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& sprite);
 
 	////////////////////////////////////////////////////////////
 	/// \brief SpriteComponent with both sprites
-	///
+	/// 
+	/// \param position      Position set to sprite
+	/// \param texture       Source texture
+	/// \param spriteDefault Sub-rectangle of the texture to assign to the default sprite
+	/// \param spriteAlt     Optional sub-rectangle of the texture to assign to the alternative sprite
+	/// \param useAlt        Use alternative sprite instead of the default one
+	/// 
 	////////////////////////////////////////////////////////////
-	SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture_pointer, const sf::IntRect& sprite_default, std::optional<const sf::IntRect> sprite_alt, bool use_alt = false);
+	SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& spriteDefault, std::optional<const sf::IntRect> spriteAlt, bool useAlt = false);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Switch between the default and the alternative sprites.
 	///
 	/// If the alternative sprite was not provided, SpriteComponent uses the default sprite regardless of the provided value.
 	///
-	/// \param use_alt true to use the alternative sprite, false to use the default one.
+	/// \param useAlt true to use the alternative sprite, false to use the default one.
 	///
 	////////////////////////////////////////////////////////////
-	void setUseAlt(bool use_alt);
+	void setUseAlt(bool useAlt);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Draw this SpriteComponent to a render target.
@@ -81,10 +91,10 @@ private:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	std::shared_ptr<const sf::Sprite> m_sprite_current; //!< Shared pointer to the currenly used sprite. The object pointed by this shall not be modified.
-	sf::Sprite                        m_sprite_default; //!< Default sprite
-	std::optional<sf::Sprite>         m_sprite_alt;     //!< Optional alternative sprite. Is initialized only if the corresponding sf::IntRect was provided
-	bool                              m_use_alt;        //!< Indicates whether to use the alternative sprite or not
+	std::shared_ptr<const sf::Sprite> m_spriteCurrent; //!< Shared pointer to the currenly used sprite. The object pointed by this shall not be modified.
+	sf::Sprite                        m_spriteDefault; //!< Default sprite
+	std::optional<sf::Sprite>         m_spriteAlt;     //!< Optional alternative sprite. Is initialized only if the corresponding sf::IntRect was provided
+	bool                              m_useAlt;        //!< Indicates whether to use the alternative sprite or not
 };
 
 } //namespace le

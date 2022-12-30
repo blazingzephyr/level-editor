@@ -33,33 +33,33 @@
 namespace le
 {
 ////////////////////////////////////////////////////////////
-SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture_pointer, const sf::IntRect& sprite) :
-m_sprite_current(&this->m_sprite_default),
-m_sprite_default(texture_pointer, sprite),
-m_sprite_alt    (std::nullopt),
-m_use_alt       (false)
+SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& sprite) :
+m_spriteCurrent(&this->m_spriteDefault),
+m_spriteDefault(texture, sprite),
+m_spriteAlt    (std::nullopt),
+m_useAlt       (false)
 {
 	setPosition(position);
 }
 
 
 ////////////////////////////////////////////////////////////
-SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture_pointer, const sf::IntRect& sprite_default, std::optional<const sf::IntRect> sprite_alt, bool use_alt) :
-m_sprite_current(nullptr),
-m_sprite_default(texture_pointer, sprite_default),
-m_sprite_alt    (sprite_alt ? std::make_optional<sf::Sprite>(texture_pointer, *sprite_alt) : std::nullopt),
-m_use_alt       (false)
+SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& spriteDefault, std::optional<const sf::IntRect> spriteAlt, bool useAlt) :
+m_spriteCurrent(nullptr),
+m_spriteDefault(texture, spriteDefault),
+m_spriteAlt    (spriteAlt ? std::make_optional<sf::Sprite>(texture, *spriteAlt) : std::nullopt),
+m_useAlt       (false)
 {
 	setPosition(position);
-	setUseAlt(use_alt);
+	setUseAlt(useAlt);
 }
 
 
 ////////////////////////////////////////////////////////////
-void SpriteComponent::setUseAlt(bool use_alt)
+void SpriteComponent::setUseAlt(bool useAlt)
 {
-	this->m_use_alt = this->m_sprite_alt && use_alt;
-	this->m_sprite_current = std::shared_ptr<const sf::Sprite>(this->m_use_alt ? std::to_address(this->m_sprite_alt) : &this->m_sprite_default);
+	this->m_useAlt = this->m_spriteAlt && useAlt;
+	this->m_spriteCurrent = std::shared_ptr<const sf::Sprite>(this->m_useAlt ? std::to_address(this->m_spriteAlt) : &this->m_spriteDefault);
 }
 
 
@@ -67,7 +67,7 @@ void SpriteComponent::setUseAlt(bool use_alt)
 void SpriteComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	target.draw(*this->m_sprite_current, states);
+	target.draw(*this->m_spriteCurrent, states);
 }
 
 } //namespace le
