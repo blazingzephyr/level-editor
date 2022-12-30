@@ -1,22 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
+    <Filter Include="Source">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Файлы заголовков">
+    <Filter Include="Source\Controls">
+      <UniqueIdentifier>{46fe3723-72c3-44aa-96e3-f878b8e20b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Файлы ресурсов">
+    <Filter Include="Headers\Controls">
+      <UniqueIdentifier>{a4926dbe-3461-41f4-ae95-7dff6cc06848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source\Components">
+      <UniqueIdentifier>{0b7f4fff-6585-4f00-a641-03785c622e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Components">
+      <UniqueIdentifier>{3c83ec71-d085-4ff9-8cff-3c0af33fb9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Themes">
+      <UniqueIdentifier>{89597571-dc69-4a57-a538-08a137973235}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\WinMain.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="src\controls\sprite_component.cpp">
+      <Filter>Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\controls\text_component.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\themes\text_style.hpp">
+      <Filter>Headers\Themes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\controls\text_component.hpp">
+      <Filter>Headers\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controls\sprite_component.hpp">
+      <Filter>Headers\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

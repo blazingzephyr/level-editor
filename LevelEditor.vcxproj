@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="src\controls\sprite_component.cpp" />
     <ClCompile Include="src\controls\text_component.cpp" />
+    <ClCompile Include="src\themes\text_style.hpp">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\controls\sprite_component.hpp" />
