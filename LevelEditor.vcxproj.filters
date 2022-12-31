@@ -68,7 +68,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ui\interfaces\IUpdateable.hpp">
+    <ClInclude Include="src\ui\interfaces\Updatable.hpp">
       <Filter>Headers\Controls\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\components\SpriteComponent.hpp">
@@ -82,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="src\ui\controls\CheckBox.hpp">
       <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\interfaces\EventReceiver.hpp">
+      <Filter>Headers\Controls\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
