@@ -45,6 +45,15 @@ namespace le
 class SpriteComponent : public sf::Drawable, public sf::Transformable
 {
 public:
+
+	////////////////////////////////////////////////////////////
+	/// \brief Default constructor
+	/// 
+	/// Constructs an empty SpriteComponent
+	/// 
+	////////////////////////////////////////////////////////////
+	SpriteComponent();
+
 	////////////////////////////////////////////////////////////
 	/// \brief SpriteComponent without the alternative sprite
 	///
@@ -91,10 +100,10 @@ private:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	std::shared_ptr<const sf::Sprite> m_spriteCurrent; //!< Shared pointer to the currenly used sprite. The object pointed by this shall not be modified.
-	sf::Sprite                        m_spriteDefault; //!< Default sprite
-	std::optional<sf::Sprite>         m_spriteAlt;     //!< Optional alternative sprite. Is initialized only if the corresponding sf::IntRect was provided
-	bool                              m_useAlt;        //!< Indicates whether to use the alternative sprite or not
+	const sf::Sprite*         m_spriteCurrent; //!< Pointer to the currenly used sprite. The object pointed by this shall not be modified.
+	sf::Sprite                m_spriteDefault; //!< Default sprite
+	std::optional<sf::Sprite> m_spriteAlt;     //!< Optional alternative sprite. Is initialized only if the corresponding sf::IntRect was provided
+	bool                      m_useAlt;        //!< Indicates whether to use the alternative sprite or not
 };
 
 } //namespace le

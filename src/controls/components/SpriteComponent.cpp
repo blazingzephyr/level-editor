@@ -33,22 +33,28 @@
 namespace le
 {
 ////////////////////////////////////////////////////////////
+SpriteComponent::SpriteComponent() :
+m_spriteDefault(),
+m_spriteAlt    (std::nullopt)
+{
+	setUseAlt(false);
+}
+
+
+////////////////////////////////////////////////////////////
 SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& sprite) :
-m_spriteCurrent(&this->m_spriteDefault),
 m_spriteDefault(texture, sprite),
-m_spriteAlt    (std::nullopt),
-m_useAlt       (false)
+m_spriteAlt    (std::nullopt)
 {
 	setPosition(position);
+	setUseAlt(false);
 }
 
 
 ////////////////////////////////////////////////////////////
 SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& spriteDefault, std::optional<const sf::IntRect> spriteAlt, bool useAlt) :
-m_spriteCurrent(nullptr),
 m_spriteDefault(texture, spriteDefault),
-m_spriteAlt    (spriteAlt ? std::make_optional<sf::Sprite>(texture, *spriteAlt) : std::nullopt),
-m_useAlt       (false)
+m_spriteAlt    (spriteAlt ? std::make_optional<sf::Sprite>(texture, *spriteAlt) : std::nullopt)
 {
 	setPosition(position);
 	setUseAlt(useAlt);
@@ -59,7 +65,7 @@ m_useAlt       (false)
 void SpriteComponent::setUseAlt(bool useAlt)
 {
 	this->m_useAlt = this->m_spriteAlt && useAlt;
-	this->m_spriteCurrent = std::shared_ptr<const sf::Sprite>(this->m_useAlt ? std::to_address(this->m_spriteAlt) : &this->m_spriteDefault);
+	this->m_spriteCurrent = this->m_useAlt ? std::to_address(this->m_spriteAlt) : &this->m_spriteDefault;
 }
 
 
