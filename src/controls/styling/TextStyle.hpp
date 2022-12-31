@@ -71,7 +71,7 @@ struct TextStyle
 	////////////////////////////////////////////////////////////
 	HorizontalAlignment       m_horizontal_align;     //!< Horizontal alignment
 	VerticalAlignment         m_vertical_align;       //!< Vertical alignment
-	std::shared_ptr<sf::Font> m_font;                 //!< Shared pointer to a font used to display the string.
+	const sf::Font*           m_font;                 //!< Shared pointer to a font used to display the string.
 	unsigned int              m_characterSize;        //!< Base size of characters, in pixels
 	float                     m_letterSpacingFactor;  //!< Spacing factor between letters
 	float                     m_lineSpacingFactor;    //!< Spacing factor between lines
