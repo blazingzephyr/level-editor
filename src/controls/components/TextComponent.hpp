@@ -44,6 +44,15 @@ namespace le
 class TextComponent : public sf::Drawable, public sf::Transformable
 {
 public:
+
+	////////////////////////////////////////////////////////////
+	/// \brief Default constructor
+	///
+	/// Constructs an empty TextComponent
+	///
+	////////////////////////////////////////////////////////////
+	TextComponent();
+
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
@@ -54,7 +63,7 @@ public:
 	/// \param textOffset Offset of the text towards the render texture
 	///
 	////////////////////////////////////////////////////////////
-	TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, std::shared_ptr<const le::TextStyle> style, const sf::String& string = sf::String(), const sf::Vector2f& textOffset = sf::Vector2f());
+	TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const le::TextStyle& style, const sf::String& string = sf::String(), const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
     /// \brief Set the text's string
@@ -129,7 +138,7 @@ private:
 	sf::Color                            m_clearColor;    //!< Color used to clear m_renderTexture
 	sf::Text                             m_text;          //!< Text drawn to m_renderTexture
 	sf::Vector2f                         m_textOffset;    //!< Offset of the text towards m_renderTexture
-	std::shared_ptr<const le::TextStyle> m_style;         //!< Text style
+	const le::TextStyle&                 m_style;         //!< Text style
 };
 
 } //namespace le
