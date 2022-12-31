@@ -19,33 +19,72 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source\Components">
-      <UniqueIdentifier>{0b7f4fff-6585-4f00-a641-03785c622e59}</UniqueIdentifier>
+    <Filter Include="Headers\Controls\Controls">
+      <UniqueIdentifier>{140c2177-34c5-41ab-b0d4-9bdc03ec4444}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Components">
+    <Filter Include="Headers\Controls\Components">
       <UniqueIdentifier>{3c83ec71-d085-4ff9-8cff-3c0af33fb9f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Themes">
+    <Filter Include="Headers\Controls\Interfaces">
+      <UniqueIdentifier>{2eb361c4-dd4d-4136-9b10-1a904cb795ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Controls\Themes">
       <UniqueIdentifier>{89597571-dc69-4a57-a538-08a137973235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Controls\Components">
+      <UniqueIdentifier>{0b7f4fff-6585-4f00-a641-03785c622e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Controls\Interfaces">
+      <UniqueIdentifier>{230b8ed1-0dcd-489c-a7c9-a93c9b8cd1b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Controls\Controls">
+      <UniqueIdentifier>{836d7017-e6a4-4a85-9a7e-89eb7af6cf0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Controls\Themes">
+      <UniqueIdentifier>{63e176fd-af44-42da-85ff-9f9caffa1ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{9c553241-79b3-4eb2-b7e6-d7a85c6eaa9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Utility">
+      <UniqueIdentifier>{339f04c3-f078-403d-bf02-be5c35fc4618}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\controls\sprite_component.cpp">
-      <Filter>Source\Components</Filter>
+    <ClCompile Include="src\controls\styling\TextStyle.hpp">
+      <Filter>Headers\Controls\Themes</Filter>
     </ClCompile>
-    <ClCompile Include="src\controls\text_component.cpp">
-      <Filter>Source\Components</Filter>
+    <ClCompile Include="src\controls\components\TextComponent.cpp">
+      <Filter>Source\Controls\Components</Filter>
     </ClCompile>
-    <ClCompile Include="src\themes\text_style.hpp">
-      <Filter>Headers\Themes</Filter>
+    <ClCompile Include="src\controls\components\SpriteComponent.cpp">
+      <Filter>Source\Controls\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controls\controls\CheckBox.cpp">
+      <Filter>Source\Controls\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\controls\text_component.hpp">
-      <Filter>Headers\Components</Filter>
+    <ClInclude Include="src\controls\interfaces\IUpdateable.hpp">
+      <Filter>Headers\Controls\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="src\controls\sprite_component.hpp">
-      <Filter>Headers\Components</Filter>
+    <ClInclude Include="src\controls\interfaces\IControl.hpp">
+      <Filter>Headers\Controls\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controls\components\SpriteComponent.hpp">
+      <Filter>Headers\Controls\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controls\components\TextComponent.hpp">
+      <Filter>Headers\Controls\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utility\Config.hpp">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controls\controls\CheckBox.hpp">
+      <Filter>Headers\Controls\Controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
