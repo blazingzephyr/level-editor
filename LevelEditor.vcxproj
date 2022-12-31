@@ -22,6 +22,7 @@
     <ClCompile Include="src\ui\components\SpriteComponent.cpp" />
     <ClCompile Include="src\ui\components\TextComponent.cpp" />
     <ClCompile Include="src\ui\controls\CheckBox.cpp" />
+    <ClCompile Include="src\ui\interfaces\EventReceiver.cpp" />
     <ClCompile Include="src\ui\styling\TextStyle.hpp">
       <FileType>CppHeader</FileType>
     </ClCompile>
