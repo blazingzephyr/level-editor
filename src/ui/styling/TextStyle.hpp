@@ -38,7 +38,7 @@
 namespace le
 {
 ////////////////////////////////////////////////////////////
-/// \brief Standard layout class representing collection of styling options for sf::Text and le::TextComponent
+/// \brief Standard layout class representing a collection of styling options for sf::Text and le::TextComponent
 ///
 ////////////////////////////////////////////////////////////
 struct TextStyle
