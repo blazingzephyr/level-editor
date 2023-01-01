@@ -49,7 +49,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
-	/// Constructs an empty TextComponent
+	/// This constructor creates an invalid TextComponent
 	///
 	////////////////////////////////////////////////////////////
 	TextComponent();
@@ -64,7 +64,8 @@ public:
 	/// \param textOffset Offset of the text towards the render texture
 	///
 	////////////////////////////////////////////////////////////
-	TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const le::TextStyle& style, const sf::String& string = sf::String(), const sf::Vector2f& textOffset = sf::Vector2f());
+	TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const le::TextStyle& style,
+	const sf::String& string = sf::String(), const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
     /// \brief Set the text's string

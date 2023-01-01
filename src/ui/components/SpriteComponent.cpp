@@ -52,7 +52,8 @@ m_spriteAlt    (std::nullopt)
 
 
 ////////////////////////////////////////////////////////////
-SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& spriteDefault, std::optional<const sf::IntRect> spriteAlt, bool useAlt) :
+SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture,
+const sf::IntRect& spriteDefault, std::optional<const sf::IntRect> spriteAlt, bool useAlt) :
 m_spriteDefault(texture, spriteDefault),
 m_spriteAlt    (spriteAlt ? std::make_optional<sf::Sprite>(texture, *spriteAlt) : std::nullopt)
 {

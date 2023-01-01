@@ -46,7 +46,8 @@ m_style(le::TextStyle())
 
 
 ////////////////////////////////////////////////////////////
-TextComponent::TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const le::TextStyle& style, const sf::String& string, const sf::Vector2f& textOffset) :
+TextComponent::TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const le::TextStyle& style,
+const sf::String& string, const sf::Vector2f& textOffset) :
 m_size(size),
 m_sprite(sf::Texture(), sf::IntRect(0, 0, size.x, size.y)),
 m_renderTexture(),

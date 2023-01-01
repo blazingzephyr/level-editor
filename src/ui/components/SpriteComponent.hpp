@@ -49,7 +49,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	/// 
-	/// Constructs an empty SpriteComponent
+	///  This constructor creates an invalid SpriteComponent
 	/// 
 	////////////////////////////////////////////////////////////
 	SpriteComponent();
@@ -74,7 +74,8 @@ public:
 	/// \param useAlt        Use alternative sprite instead of the default one
 	/// 
 	////////////////////////////////////////////////////////////
-	SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& spriteDefault, std::optional<const sf::IntRect> spriteAlt, bool useAlt = false);
+	SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& spriteDefault,
+	std::optional<const sf::IntRect> spriteAlt, bool useAlt = false);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Switch between the default and the alternative sprites.
