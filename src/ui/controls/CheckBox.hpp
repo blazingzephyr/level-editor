@@ -65,7 +65,7 @@ public:
 	/// 
 	////////////////////////////////////////////////////////////
 	CheckBox(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::IntRect& spriteUnchecked,
-	const sf::IntRect& spriteChecked, Event<CheckBox, bool> onCheckedChanged = Empty<CheckBox, bool>, bool isChecked = false, bool enabled = true);
+	const sf::IntRect& spriteChecked, Event1<CheckBox, bool> onCheckedChanged = Empty1<CheckBox, bool>, bool isChecked = false, bool enabled = true);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Check state of the box
@@ -83,8 +83,8 @@ public:
 	void setChecked(bool checked, bool raiseEvent = true);
 
 private:
-	Event<CheckBox, bool> m_onCheckedChanged; //!< Event raised whenever m_isChecked changes
-	bool                  m_isChecked;        //!< Check state of the box
+	Event1<CheckBox, bool> m_onCheckedChanged; //!< Event raised whenever m_isChecked changes
+	bool                   m_isChecked;        //!< Check state of the box
 
 	////////////////////////////////////////////////////////////
 	/// \brief Sets default or alternate sprite for use
