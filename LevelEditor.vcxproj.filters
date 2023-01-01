@@ -66,7 +66,10 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\interfaces\EventReceiver.cpp">
+    <ClCompile Include="src\ui\interfaces\Control.cpp">
+      <Filter>Source\Controls\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\interfaces\SpriteBasedControl.cpp">
       <Filter>Source\Controls\Interfaces</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,6 +90,12 @@
       <Filter>Headers\Controls\Controls</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\interfaces\EventReceiver.hpp">
+      <Filter>Headers\Controls\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\interfaces\Control.hpp">
+      <Filter>Headers\Controls\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\interfaces\SpriteBasedControl.hpp">
       <Filter>Headers\Controls\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
