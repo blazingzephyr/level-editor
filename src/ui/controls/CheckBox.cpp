@@ -44,6 +44,7 @@ m_isChecked(false)
 ////////////////////////////////////////////////////////////
 CheckBox::CheckBox(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::IntRect& spriteUnchecked,
 const sf::IntRect& spriteChecked, Event1<CheckBox, bool> onCheckedChanged, bool isChecked, bool enabled) :
+
 SpriteBasedControl::SpriteBasedControl(position, size, texture, spriteUnchecked, spriteChecked, false, enabled),
 m_onCheckedChanged(onCheckedChanged)
 {
