@@ -42,7 +42,7 @@ m_theme(TextTheme())
 
 
 ////////////////////////////////////////////////////////////
-TextBasedControl::TextBasedControl(sf::Vector2f position, sf::Vector2f textPosition,  sf::Vector2f size, const sf::Texture& texture,
+TextBasedControl::TextBasedControl(const sf::Vector2f& position, const sf::Vector2f& textPosition, const sf::Vector2f& size, const sf::Texture& texture,
 const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt, const TextTheme& textTheme, 
 const sf::String& string, const sf::Vector2f& textOffset, bool useAlt, bool enabled) :
 

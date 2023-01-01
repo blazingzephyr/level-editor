@@ -69,7 +69,7 @@ public:
 	/// \param enable        Enable this control
 	/// 
 	////////////////////////////////////////////////////////////
-	TextBasedControl(sf::Vector2f position, sf::Vector2f textPosition, sf::Vector2f size, const sf::Texture& texture, const sf::IntRect& spriteDefault,
+	TextBasedControl(const sf::Vector2f& position, const sf::Vector2f& textPosition, const sf::Vector2f& size, const sf::Texture& texture, const sf::IntRect& spriteDefault,
 		const sf::IntRect& spriteAlt, const TextTheme& textTheme, const sf::String& string = sf::String(),
 		const sf::Vector2f& textOffset = sf::Vector2f(), bool useAlt = false, bool enabled = true);
 
