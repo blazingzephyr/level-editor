@@ -45,7 +45,7 @@ public:
     virtual ~Updatable() {}
 
     ////////////////////////////////////////////////////////////
-    /// \brief Update the object within the application's main thread loop
+    /// \brief Updates the object within the application's main thread loop
     ///
     /// This is a pure virtual function that has to be implemented
     /// by the derived class to define how the updatable should be
