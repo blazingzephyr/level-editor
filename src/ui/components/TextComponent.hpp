@@ -31,6 +31,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "../styling/TextStyle.hpp"
+#include <optional>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
@@ -64,7 +65,7 @@ public:
 	/// \param textOffset Offset of the text towards the render texture
 	///
 	////////////////////////////////////////////////////////////
-	TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const le::TextStyle& style,
+	TextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const TextStyle* style,
 	const sf::String& string = sf::String(), const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
@@ -102,9 +103,18 @@ public:
 	void setClearColor(const sf::Color& color);
 
 	////////////////////////////////////////////////////////////
+	/// \brief Set text style
+	///
+	/// \param style New style
+	/// 
+	////////////////////////////////////////////////////////////
+	void setStyle(const TextStyle* style);
+
+	////////////////////////////////////////////////////////////
 	/// \brief Apply changes made to the style to the text
 	///
-	/// The style previously passed in the constructor has to remain valid in order for this to work.
+	/// Text component stores a reference to a style that was passed in the constructor or setStyle.
+	/// In order for this to work the reference has to remain valid.
 	///
 	////////////////////////////////////////////////////////////
 	void applyStyleChanges();
@@ -134,13 +144,13 @@ private:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	sf::Vector2u                         m_size;          //!< Size of this text component
-	sf::Sprite                           m_sprite;        //!< Sprite drawn in draw(sf::RenderTarget& target, sf::RenderStates states)
-	sf::RenderTexture                    m_renderTexture; //!< RenderTexture that is applied to m_sprite
-	sf::Color                            m_clearColor;    //!< Color used to clear m_renderTexture
-	sf::Text                             m_text;          //!< Text drawn to m_renderTexture
-	sf::Vector2f                         m_textOffset;    //!< Offset of the text towards m_renderTexture
-	const le::TextStyle&                 m_style;         //!< Text style
+	sf::Vector2u      m_size;          //!< Size of this text component
+	sf::Sprite        m_sprite;        //!< Sprite drawn in draw(sf::RenderTarget& target, sf::RenderStates states)
+	sf::RenderTexture m_renderTexture; //!< RenderTexture that is applied to m_sprite
+	sf::Color         m_clearColor;    //!< Color used to clear m_renderTexture
+	sf::Text          m_text;          //!< Text drawn to m_renderTexture
+	sf::Vector2f      m_textOffset;    //!< Offset of the text towards m_renderTexture
+	const TextStyle*  m_style;         //!< Text style
 };
 
 } //namespace le
