@@ -131,7 +131,7 @@ void Control::onMouseMoved(sf::Event::MouseMoveEvent mouseMove)
 {
 	if (this->m_enabled)
 	{
-		bool hovering = contains(mouseMove.x, mouseMove.y);
+		bool hovering = contains(static_cast<float>(mouseMove.x), static_cast<float>(mouseMove.y));
 		if (this->m_hovering != hovering)
 		{
 			this->m_hovering = hovering;
