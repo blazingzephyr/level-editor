@@ -49,20 +49,6 @@ using Event0 = std::function<void(T& sender)>;
 template <typename T, typename U>
 using Event1 = std::function<void(T& sender, U arg)>;
 
-////////////////////////////////////////////////////////////
-/// \brief Alias for an empty event
-///
-////////////////////////////////////////////////////////////
-template <typename T>
-Event0<T> Empty0 = Event0<T>();
-
-////////////////////////////////////////////////////////////
-/// \brief Alias for an empty event
-///
-////////////////////////////////////////////////////////////
-template <typename T, typename U>
-Event1<T, U> Empty1 = Event1<T, U>();
-
 } // namespace le
 
 
