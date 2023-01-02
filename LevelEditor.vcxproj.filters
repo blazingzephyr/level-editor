@@ -28,9 +28,6 @@
     <Filter Include="Headers\Controls\Interfaces">
       <UniqueIdentifier>{2eb361c4-dd4d-4136-9b10-1a904cb795ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Controls\Themes">
-      <UniqueIdentifier>{89597571-dc69-4a57-a538-08a137973235}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Controls\Components">
       <UniqueIdentifier>{0b7f4fff-6585-4f00-a641-03785c622e59}</UniqueIdentifier>
     </Filter>
@@ -49,10 +46,13 @@
     <Filter Include="Headers\Utility">
       <UniqueIdentifier>{339f04c3-f078-403d-bf02-be5c35fc4618}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Controls\Styling">
+      <UniqueIdentifier>{89597571-dc69-4a57-a538-08a137973235}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ui\styling\TextStyle.hpp">
-      <Filter>Headers\Controls\Themes</Filter>
+      <Filter>Headers\Controls\Styling</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\components\TextComponent.cpp">
       <Filter>Source\Controls\Components</Filter>
@@ -71,6 +71,18 @@
     </ClCompile>
     <ClCompile Include="src\ui\interfaces\SpriteBasedControl.cpp">
       <Filter>Source\Controls\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\controls\Button.cpp">
+      <Filter>Source\Controls\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\interfaces\TextBasedControl.cpp">
+      <Filter>Source\Controls\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\controls\ComboBox.cpp">
+      <Filter>Source\Controls\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\components\LocalizableTextComponent.cpp">
+      <Filter>Source\Controls\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +109,21 @@
     </ClInclude>
     <ClInclude Include="src\ui\interfaces\SpriteBasedControl.hpp">
       <Filter>Headers\Controls\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\controls\Button.hpp">
+      <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\interfaces\TextBasedControl.hpp">
+      <Filter>Headers\Controls\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\styling\TextTheme.hpp">
+      <Filter>Headers\Controls\Styling</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\controls\ComboBox.hpp">
+      <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\components\LocalizableTextComponent.hpp">
+      <Filter>Headers\Controls\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
