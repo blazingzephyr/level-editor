@@ -145,13 +145,13 @@ protected:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	sf::Vector2u       m_size;          //!< Size of this text component
-	sf::Sprite         m_sprite;        //!< Sprite drawn in draw(sf::RenderTarget& target, sf::RenderStates states)
-	sf::RenderTexture* m_renderTexture; //!< RenderTexture that is applied to m_sprite
-	sf::Color          m_clearColor;    //!< Color used to clear m_renderTexture
-	sf::Text           m_text;          //!< Text drawn to m_renderTexture
-	sf::Vector2f       m_textOffset;    //!< Offset of the text towards m_renderTexture
-	const TextStyle*   m_style;         //!< Text style
+	sf::Vector2u                       m_size;          //!< Size of this text component
+	sf::Sprite                         m_sprite;        //!< Sprite drawn in draw(sf::RenderTarget& target, sf::RenderStates states)
+	std::shared_ptr<sf::RenderTexture> m_renderTexture; //!< RenderTexture that is applied to m_sprite
+	sf::Color                          m_clearColor;    //!< Color used to clear m_renderTexture
+	sf::Text                           m_text;          //!< Text drawn to m_renderTexture
+	sf::Vector2f                       m_textOffset;    //!< Offset of the text towards m_renderTexture
+	const TextStyle*                   m_style;         //!< Text style
 };
 
 } //namespace le
