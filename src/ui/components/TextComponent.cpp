@@ -63,7 +63,7 @@ m_textOffset(textOffset)
 
 ////////////////////////////////////////////////////////////
 TextComponent::TextComponent(const TextComponent& copy) :
-TextComponent::TextComponent(copy.getPosition(), copy.m_size, copy.m_style, copy.m_text.getString(), copy.m_textOffset)
+TextComponent(copy.getPosition(), copy.m_size, copy.m_style, copy.m_text.getString(), copy.m_textOffset)
 {
 }
 
