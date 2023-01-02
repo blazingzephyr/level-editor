@@ -49,7 +49,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	/// 
-	/// This constructor creates an invalid text-based control
+	/// This constructor creates an empty text-based control
 	/// 
 	////////////////////////////////////////////////////////////
 	TextBasedControl();

@@ -49,7 +49,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	/// 
-	///  This constructor creates an invalid SpriteComponent
+	///  This constructor creates an empty SpriteComponent
 	/// 
 	////////////////////////////////////////////////////////////
 	SpriteComponent();
