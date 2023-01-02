@@ -69,6 +69,12 @@ public:
 	const sf::String& string = sf::String(), const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
+	/// \brief Copy constructor
+	///
+	////////////////////////////////////////////////////////////
+	TextComponent(const TextComponent&);
+
+	////////////////////////////////////////////////////////////
     /// \brief Set the text's string
     ///
     /// The \a string argument is a sf::String, which can
