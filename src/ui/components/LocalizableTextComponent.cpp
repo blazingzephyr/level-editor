@@ -48,14 +48,7 @@ const TextStyle* style, const Strings* strings, const sf::String& string, const 
 TextComponent::TextComponent(position, size, style, L"", textOffset),
 m_strings(strings ? strings : new Strings())
 {
-	setString(string);
-}
-
-
-////////////////////////////////////////////////////////////
-LocalizableTextComponent::LocalizableTextComponent(const LocalizableTextComponent& copy) :
-LocalizableTextComponent(copy.getPosition(), copy.m_size, copy.m_style, copy.m_strings, copy.m_string, copy.m_textOffset)
-{
+	LocalizableTextComponent::setString(string);
 }
 
 

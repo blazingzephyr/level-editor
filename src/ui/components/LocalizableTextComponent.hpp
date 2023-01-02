@@ -67,12 +67,6 @@ public:
 	const Strings*, const sf::String& string, const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
-	/// \brief Copy constructor
-	///
-	////////////////////////////////////////////////////////////
-	LocalizableTextComponent(const LocalizableTextComponent&);
-
-	////////////////////////////////////////////////////////////
 	/// \brief Set the text's string
 	///
     /// \param string Key of string assigned to the text
