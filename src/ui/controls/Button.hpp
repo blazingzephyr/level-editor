@@ -47,7 +47,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	/// 
-	/// Constructs an invalid button
+	/// Constructs an empty button
 	/// 
 	////////////////////////////////////////////////////////////
 	Button();
@@ -61,16 +61,16 @@ public:
 	/// \param spriteDefault Sub-rectangle of the texture to assign to the default sprite
 	/// \param spriteActive  Sub-rectangle of the texture to assign to the active sprite
 	/// \param textTheme     Text theme
-	/// \param string        String assigned to the text
+	/// \param strings       List of strings
+	/// \param string        String key
 	/// \param onReleased    Event raised when this button is released
 	/// \param onHold        Event raised when this button is held
 	/// \param enable        Enable this button
 	/// 
 	////////////////////////////////////////////////////////////
 	Button(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::IntRect& spriteDefault,
-	const sf::IntRect& spriteActive, const TextTheme& textTheme, const sf::String& string = sf::String(),
+	const sf::IntRect& spriteActive, const TextTheme* textTheme, const Strings* strings, const sf::String& string,
 	Event0<Button> onReleased = Event0<Button>(), Event0<Button> onHold = Event0<Button>(), bool enabled = true);
-
 
 private:
 	Event0<Button> m_onReleased; //!< Event raised when this button is released

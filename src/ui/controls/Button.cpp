@@ -42,14 +42,15 @@ m_onHold()
 
 
 Button::Button(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, 
-const sf::IntRect& spriteDefault, const sf::IntRect& spriteActive, const TextTheme& textTheme, const sf::String& string,
-Event0<Button> onReleased, Event0<Button> onHold, bool enabled) :
+const sf::IntRect& spriteDefault, const sf::IntRect& spriteActive, const TextTheme* textTheme, const Strings* strings,
+const sf::String& string, Event0<Button> onReleased, Event0<Button> onHold, bool enabled) :
 
-TextBasedControl::TextBasedControl(position, sf::Vector2f(0, 0), size, texture, spriteDefault, spriteActive,
-textTheme, string, sf::Vector2f(), false, enabled),
+TextBasedControl::TextBasedControl(position, sf::Vector2f(0, 0), size, texture, spriteDefault,
+spriteActive, textTheme, false, enabled),
 m_onReleased(onReleased),
 m_onHold(onHold)
 {
+	this->m_text = LocalizableTextComponent(sf::Vector2f(), sf::Vector2u(size), textTheme->m_default, strings, string);
 }
 
 ////////////////////////////////////////////////////////////
