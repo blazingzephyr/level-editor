@@ -199,12 +199,20 @@ protected:
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released
-	///        while the control is being hovered
 	/// 
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
 	virtual void onReleased(sf::Event::MouseButtonEvent mouseButton) {}
+
+	////////////////////////////////////////////////////////////
+	/// \brief Event triggered when a mouse button is released
+	///        while the control is being hovered
+	/// 
+	/// \param mouseButton Mouse button event parameters
+	///
+	////////////////////////////////////////////////////////////
+	virtual void onReleasedControl(sf::Event::MouseButtonEvent mouseButton) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor moves

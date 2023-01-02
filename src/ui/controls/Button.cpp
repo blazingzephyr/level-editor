@@ -43,11 +43,11 @@ m_onHold()
 
 Button::Button(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, 
 const sf::IntRect& spriteDefault, const sf::IntRect& spriteActive, const TextTheme* textTheme, const Strings* strings,
-const sf::String& string, Event0<Button> onReleased, Event0<Button> onHold, bool enabled) :
+const sf::String& string, Event0<Button> onReleasedControl, Event0<Button> onHold, bool enabled) :
 
 TextBasedControl::TextBasedControl(position, sf::Vector2f(0, 0), size, texture, spriteDefault,
 spriteActive, textTheme, false, enabled),
-m_onReleased(onReleased),
+m_onReleased(onReleasedControl),
 m_onHold(onHold)
 {
 	this->m_text = LocalizableTextComponent(sf::Vector2f(), sf::Vector2u(size), textTheme->m_default, strings, string);
@@ -69,9 +69,9 @@ void Button::onClicked(sf::Event::MouseButtonEvent mouseButton)
 
 
 ////////////////////////////////////////////////////////////
-void Button::onReleased(sf::Event::MouseButtonEvent mouseButton)
+void Button::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
 {
-	TextBasedControl::onReleased(mouseButton);
+	TextBasedControl::onReleasedControl(mouseButton);
 	this->m_sprite.setUseAlt(false);
 	this->m_onReleased(*this);
 }

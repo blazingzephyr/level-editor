@@ -102,9 +102,9 @@ void CheckBox::onClicked(sf::Event::MouseButtonEvent mouseButton)
 
 
 ////////////////////////////////////////////////////////////
-void CheckBox::onReleased(sf::Event::MouseButtonEvent mouseButton)
+void CheckBox::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
 {
-	SpriteBasedControl::onReleased(mouseButton);
+	SpriteBasedControl::onReleasedControl(mouseButton);
 	setChecked(!this->m_isChecked);
 }
 

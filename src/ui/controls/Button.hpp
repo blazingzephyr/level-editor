@@ -63,14 +63,14 @@ public:
 	/// \param textTheme     Text theme
 	/// \param strings       List of strings
 	/// \param string        String key
-	/// \param onReleased    Event raised when this button is released
+	/// \param onReleasedControl    Event raised when this button is released
 	/// \param onHold        Event raised when this button is held
 	/// \param enable        Enable this button
 	/// 
 	////////////////////////////////////////////////////////////
 	Button(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::IntRect& spriteDefault,
 	const sf::IntRect& spriteActive, const TextTheme* textTheme, const Strings* strings, const sf::String& string,
-	Event0<Button> onReleased = Event0<Button>(), Event0<Button> onHold = Event0<Button>(), bool enabled = true);
+	Event0<Button> onReleasedControl = Event0<Button>(), Event0<Button> onHold = Event0<Button>(), bool enabled = true);
 
 private:
 
@@ -96,7 +96,7 @@ private:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onReleased(sf::Event::MouseButtonEvent mouseButton) override;
+	void onReleasedControl(sf::Event::MouseButtonEvent mouseButton) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor enters the area of the button

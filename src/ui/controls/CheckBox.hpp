@@ -117,7 +117,7 @@ private:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onReleased(sf::Event::MouseButtonEvent mouseButton) override;
+	void onReleasedControl(sf::Event::MouseButtonEvent mouseButton) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor enters the area of the check box

@@ -98,7 +98,7 @@ void TextBasedControl::onClicked(sf::Event::MouseButtonEvent mouseButton)
 
 
 ////////////////////////////////////////////////////////////
-void TextBasedControl::onReleased(sf::Event::MouseButtonEvent mouseButton)
+void TextBasedControl::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
 {
     setTextStyle();
 }

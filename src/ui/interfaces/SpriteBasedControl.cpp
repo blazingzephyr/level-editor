@@ -69,9 +69,9 @@ void SpriteBasedControl::onClicked(sf::Event::MouseButtonEvent mouseButton)
 
 
 ////////////////////////////////////////////////////////////
-void SpriteBasedControl::onReleased(sf::Event::MouseButtonEvent mouseButton)
+void SpriteBasedControl::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
 {
-	printf("SpriteBasedControl::onReleased IS NOT IMPLEMENTED\n");
+	printf("SpriteBasedControl::onReleasedControl IS NOT IMPLEMENTED\n");
 }
 
 

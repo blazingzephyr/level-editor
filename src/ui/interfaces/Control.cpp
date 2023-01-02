@@ -118,9 +118,14 @@ void Control::onMouseButtonReleased(sf::Event::MouseButtonEvent mouseButton)
 		this->m_wasHolding = this->m_holding;
 		this->m_holding = false;
 
-		if (this->m_hovering && this->m_wasHolding)
+		if (this->m_wasHolding)
 		{
 			onReleased(mouseButton);
+			
+			if (this->m_hovering)
+			{
+				onReleasedControl(mouseButton);
+			}
 		}
 	}
 }

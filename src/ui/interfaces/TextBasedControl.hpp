@@ -118,7 +118,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onReleased(sf::Event::MouseButtonEvent mouseButton) override;
+	virtual void onReleasedControl(sf::Event::MouseButtonEvent mouseButton) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor enters the area of the control
