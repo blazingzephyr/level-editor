@@ -34,14 +34,15 @@ namespace le
 {
 ////////////////////////////////////////////////////////////
 TextComponent::TextComponent() :
-m_size(),
+m_size(1, 1),
 m_sprite(),
-m_renderTexture(),
-m_clearColor(),
+m_renderTexture(new sf::RenderTexture()),
+m_clearColor(sf::Color::Transparent),
 m_text(),
-m_textOffset(),
+m_textOffset(0, 0),
 m_style(nullptr)
 {
+	this->m_renderTexture->create(1, 1);
 }
 
 
@@ -50,21 +51,14 @@ TextComponent::TextComponent(const sf::Vector2f& position, const sf::Vector2u& s
 const sf::String& string, const sf::Vector2f& textOffset) :
 m_size(size),
 m_sprite(sf::Texture(), sf::IntRect(0, 0, size.x, size.y)),
-m_renderTexture(),
+m_renderTexture(new sf::RenderTexture()),
 m_clearColor(sf::Color::Transparent),
-m_text(string, *style->m_font),
+m_text(string, style ? *style->m_font : sf::Font()),
 m_textOffset(textOffset)
 {
-	this->m_renderTexture.create(size.x, size.y);
+	this->m_renderTexture->create(std::min(1u, size.x), std::min(1u, size.y));
 	setStyle(style);
 	setPosition(position);
-}
-
-
-////////////////////////////////////////////////////////////
-TextComponent::TextComponent(const TextComponent& copy) :
-TextComponent(copy.getPosition(), copy.m_size, copy.m_style, copy.m_text.getString(), copy.m_textOffset)
-{
 }
 
 
@@ -129,59 +123,62 @@ void TextComponent::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 ////////////////////////////////////////////////////////////
 void TextComponent::alignText()
 {
-	sf::FloatRect bounds = this->m_text.getLocalBounds();
-	sf::Vector2f origin = sf::Vector2f();
-	sf::Vector2f position = sf::Vector2f();
-
-	switch (this->m_style->m_horizontal_align)
+	if (this->m_style)
 	{
-		case le::TextStyle::HorizontalAlignment::Center:
-			origin.x = bounds.left + bounds.width * 0.5f;
-			position.x = this->m_size.x * 0.5f;
-			break;
+		sf::FloatRect bounds = this->m_text.getLocalBounds();
+		sf::Vector2f origin = sf::Vector2f();
+		sf::Vector2f position = sf::Vector2f();
 
-		case le::TextStyle::HorizontalAlignment::Left:
-			origin.x = bounds.left + bounds.width * 0.075f;
-			position.x = this->m_size.x * 0.075f;
-			break;
+		switch (this->m_style->m_horizontal_align)
+		{
+			case le::TextStyle::HorizontalAlignment::Center:
+				origin.x = bounds.left + bounds.width * 0.5f;
+				position.x = this->m_size.x * 0.5f;
+				break;
 
-		case le::TextStyle::HorizontalAlignment::Right:
-			origin.x = bounds.left + bounds.width * 0.925f;
-			position.x = this->m_size.x * 0.925f;
-			break;
+			case le::TextStyle::HorizontalAlignment::Left:
+				origin.x = bounds.left + bounds.width * 0.075f;
+				position.x = this->m_size.x * 0.075f;
+				break;
+
+			case le::TextStyle::HorizontalAlignment::Right:
+				origin.x = bounds.left + bounds.width * 0.925f;
+				position.x = this->m_size.x * 0.925f;
+				break;
+		}
+
+		switch (this->m_style->m_vertical_align)
+		{
+			case le::TextStyle::VerticalAlignment::Center:
+				origin.y = bounds.top + bounds.height * 0.5f;
+				position.y = this->m_size.y * 0.5f;
+				break;
+
+			case le::TextStyle::VerticalAlignment::Top:
+				origin.y = bounds.top + bounds.height * 0.075f;
+				position.y = this->m_size.y * 0.075f;
+				break;
+
+			case le::TextStyle::VerticalAlignment::Bottom:
+				origin.y = bounds.top + bounds.height * 0.925f;
+				position.y = this->m_size.y * 0.925f;
+				break;
+		}
+
+		m_text.setOrigin(origin);
+		m_text.setPosition(position + this->m_textOffset);
+		displayRenderTexture();
 	}
-
-	switch (this->m_style->m_vertical_align)
-	{
-		case le::TextStyle::VerticalAlignment::Center:
-			origin.y = bounds.top + bounds.height * 0.5f;
-			position.y = this->m_size.y * 0.5f;
-			break;
-
-		case le::TextStyle::VerticalAlignment::Top:
-			origin.y = bounds.top + bounds.height * 0.075f;
-			position.y = this->m_size.y * 0.075f;
-			break;
-
-		case le::TextStyle::VerticalAlignment::Bottom:
-			origin.y = bounds.top + bounds.height * 0.925f;
-			position.y = this->m_size.y * 0.925f;
-			break;
-	}
-
-	m_text.setOrigin(origin);
-	m_text.setPosition(position + this->m_textOffset);
-	displayRenderTexture();
 }
 
 
 ////////////////////////////////////////////////////////////
 void TextComponent::displayRenderTexture()
 {
-	this->m_renderTexture.clear(this->m_clearColor);
-	this->m_renderTexture.draw(this->m_text);
-	this->m_renderTexture.display();
-	this->m_sprite.setTexture(this->m_renderTexture.getTexture());
+	this->m_renderTexture->clear(this->m_clearColor);
+	this->m_renderTexture->draw(this->m_text);
+	this->m_renderTexture->display();
+	this->m_sprite.setTexture(this->m_renderTexture->getTexture());
 }
 
 } // namespace le
