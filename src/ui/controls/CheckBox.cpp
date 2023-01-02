@@ -56,7 +56,7 @@ m_onCheckedChanged(onCheckedChanged)
 ////////////////////////////////////////////////////////////
 bool CheckBox::getChecked() const
 {
-	return m_isChecked;
+	return this->m_isChecked;
 }
 
 
