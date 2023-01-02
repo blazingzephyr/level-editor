@@ -53,6 +53,13 @@ m_strings(strings)
 
 
 ////////////////////////////////////////////////////////////
+LocalizableTextComponent::LocalizableTextComponent(const LocalizableTextComponent& copy) :
+LocalizableTextComponent(copy.getPosition(), copy.m_size, copy.m_style, copy.m_strings, copy.m_string, copy.m_textOffset)
+{
+}
+
+
+////////////////////////////////////////////////////////////
 void LocalizableTextComponent::setString(const sf::String& string)
 {
 	this->m_string = string;
