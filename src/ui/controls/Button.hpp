@@ -73,8 +73,6 @@ public:
 	Event0<Button> onReleased = Event0<Button>(), Event0<Button> onHold = Event0<Button>(), bool enabled = true);
 
 private:
-	Event0<Button> m_onReleased; //!< Event raised when this button is released
-	Event0<Button> m_onHold;     //!< Event raised when this button is held
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event continuously triggered when the mouse button is held
@@ -115,6 +113,12 @@ private:
 	///
 	////////////////////////////////////////////////////////////
 	void onLeft(sf::Event::MouseMoveEvent mouseMove) override;
+
+	////////////////////////////////////////////////////////////
+	// Member data
+	////////////////////////////////////////////////////////////
+	Event0<Button> m_onReleased; //!< Event raised when this button is released
+	Event0<Button> m_onHold;     //!< Event raised when this button is held
 };
 
 } //namespace le

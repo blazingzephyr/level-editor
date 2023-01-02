@@ -83,8 +83,6 @@ public:
 	void setChecked(bool checked, bool raiseEvent = true);
 
 private:
-	Event1<CheckBox, bool> m_onCheckedChanged; //!< Event raised whenever m_isChecked changes
-	bool                   m_isChecked;        //!< Check state of the box
 
 	////////////////////////////////////////////////////////////
 	/// \brief Sets default or alternate sprite for use
@@ -136,6 +134,13 @@ private:
 	///
 	////////////////////////////////////////////////////////////
 	void onLeft(sf::Event::MouseMoveEvent mouseMove) override;
+
+	////////////////////////////////////////////////////////////
+	// Member data
+	////////////////////////////////////////////////////////////
+	Event1<CheckBox, bool> m_onCheckedChanged; //!< Event raised whenever m_isChecked changes
+	bool                   m_isChecked;        //!< Check state of the box
+
 };
 
 } //namespace le
