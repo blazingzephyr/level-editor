@@ -36,20 +36,32 @@ namespace le
 TextBasedControl::TextBasedControl() :
 SpriteBasedControl::SpriteBasedControl(),
 m_text (),
-m_theme(TextTheme())
+m_theme(new TextTheme())
 {
 }
 
 
 ////////////////////////////////////////////////////////////
 TextBasedControl::TextBasedControl(const sf::Vector2f& position, const sf::Vector2f& textPosition, const sf::Vector2f& size, const sf::Texture& texture,
-const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt, const TextTheme& textTheme, 
-const sf::String& string, const sf::Vector2f& textOffset, bool useAlt, bool enabled) :
+const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt, const TextTheme* textTheme, bool useAlt, bool enabled) :
 
 SpriteBasedControl::SpriteBasedControl(position, size, texture, spriteDefault, spriteAlt, useAlt, enabled),
-m_text         (textPosition, sf::Vector2u(size), textTheme.m_default, string, textOffset),
+m_text(),
 m_theme        (textTheme)
 {
+}
+
+
+////////////////////////////////////////////////////////////
+void TextBasedControl::applyTextChanges()
+{
+    struct Caller
+    {
+        void operator()(LocalizableTextComponent& lc) { lc.applyTextChanges(); }
+        void operator()(TextComponent&)               { }
+    };
+
+    std::visit(Caller {}, this->m_text);
 }
 
 
@@ -58,20 +70,23 @@ void TextBasedControl::draw(sf::RenderTarget& target, sf::RenderStates states) c
 {
     SpriteBasedControl::draw(target, states);
     states.transform *= getTransform();
-	target.draw(this->m_text, states);
+
+    static auto draw = [&](auto& text) { target.draw(text, states); };
+    std::visit(draw, this->m_text);
 }
 
 
 ////////////////////////////////////////////////////////////
 void TextBasedControl::setTextStyle(bool forceDefault)
 {
-    const TextStyle* style = (forceDefault)     ? this->m_theme.m_default  :
-                             (!this->m_enabled) ? this->m_theme.m_disabled :
-                             (this->m_holding)  ? this->m_theme.m_held     :
-                             (this->m_hovering) ? this->m_theme.m_hovered  :
-                                                  this->m_theme.m_default;
+    const TextStyle* style = (forceDefault)     ? this->m_theme->m_default  :
+                             (!this->m_enabled) ? this->m_theme->m_disabled :
+                             (this->m_holding)  ? this->m_theme->m_held     :
+                             (this->m_hovering) ? this->m_theme->m_hovered  :
+                                                  this->m_theme->m_default;
 
-    this->m_text.setStyle(style);
+    static auto setStyle = [&](auto& text) { text.setStyle(style); };
+    std::visit(setStyle, this->m_text);
 }
 
 

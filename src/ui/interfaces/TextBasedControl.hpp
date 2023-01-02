@@ -31,8 +31,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "SpriteBasedControl.hpp"
-#include "../components/TextComponent.hpp"
+#include "../components/LocalizableTextComponent.hpp"
 #include "../styling/TextTheme.hpp"
+#include <variant>
 
 
 namespace le
@@ -63,21 +64,25 @@ public:
 	/// \param spriteDefault Sub-rectangle of the texture to assign to the default sprite
 	/// \param spriteAlt     Sub-rectangle of the texture to assign to the alternative sprite
 	/// \param theme         Text theme
-	/// \param string        String assigned to the text
-	/// \param textOffset    Offset of the text towards the render texture
 	/// \param useAlt        Use alternative sprite instead of the default one
 	/// \param enable        Enable this control
 	/// 
 	////////////////////////////////////////////////////////////
-	TextBasedControl(const sf::Vector2f& position, const sf::Vector2f& textPosition, const sf::Vector2f& size, const sf::Texture& texture, const sf::IntRect& spriteDefault,
-		const sf::IntRect& spriteAlt, const TextTheme& textTheme, const sf::String& string = sf::String(),
-		const sf::Vector2f& textOffset = sf::Vector2f(), bool useAlt = false, bool enabled = true);
+	TextBasedControl(const sf::Vector2f& position, const sf::Vector2f& textPosition, const sf::Vector2f& size,
+	const sf::Texture& texture, const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt,
+	const TextTheme* textTheme, bool useAlt = false, bool enabled = true);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Virtual destructor
 	///
 	////////////////////////////////////////////////////////////
 	virtual ~TextBasedControl() {}
+
+	////////////////////////////////////////////////////////////
+	/// \brief Apply changes made to the text
+	///
+	////////////////////////////////////////////////////////////
+	void applyTextChanges();
 
 	////////////////////////////////////////////////////////////
 	/// \brief Draw this sprite-based control to a render target.
@@ -134,8 +139,8 @@ protected:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	TextComponent    m_text;  //!< Text drawn in TextBasedControl::draw
-	const TextTheme& m_theme; //!< Collection of styles passed into m_text
+	std::variant<LocalizableTextComponent, TextComponent> m_text;  //!< Text drawn in TextBasedControl::draw
+	const TextTheme*                                      m_theme; //!< Collection of styles passed into m_text
 };
 
 } //namespace le
