@@ -33,6 +33,7 @@
 #include "Updatable.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Window/Event.hpp>
 
 
 namespace le

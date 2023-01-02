@@ -47,7 +47,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
-	/// This constructor creates an invalid LocalizableTextComponent
+	/// This constructor creates an empty LocalizableTextComponent
 	///
 	////////////////////////////////////////////////////////////
 	LocalizableTextComponent();
@@ -64,7 +64,7 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	LocalizableTextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const TextStyle* style,
-	const Strings& strings, const sf::String& string, const sf::Vector2f& textOffset = sf::Vector2f());
+	const Strings*, const sf::String& string, const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
 	/// \brief Copy constructor
@@ -95,7 +95,7 @@ private:
 	// Member data
 	////////////////////////////////////////////////////////////
 	sf::String     m_string;  //!< String key
-	const Strings& m_strings; //!< Reference to the strings
+	const Strings* m_strings; //!< Pointer to the strings
 };
 
 } //namespace le
