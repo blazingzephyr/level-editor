@@ -30,7 +30,6 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "EventReceiver.hpp"
 #include "Updatable.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
@@ -42,7 +41,7 @@ namespace le
 /// \brief Abstract class, representing a user control
 ///
 ////////////////////////////////////////////////////////////
-class Control : public EventReceiver, public Updatable, public sf::Drawable, public sf::Transformable 
+class Control : public Updatable, public sf::Drawable, public sf::Transformable 
 {
 public:
 
@@ -86,12 +85,36 @@ public:
 	virtual void update() override;
 
 	////////////////////////////////////////////////////////////
+	/// \brief Event triggered when a character is entered
+	///
+	/// \param unicode UTF-32 Unicode value of the character
+	///
+	////////////////////////////////////////////////////////////
+	virtual void onTextEntered(sf::Uint32 unicode) {}
+
+	////////////////////////////////////////////////////////////
+	/// \brief Event triggered when a key is pressed
+	///
+	/// \param key Key event parameters
+	///
+	////////////////////////////////////////////////////////////
+	virtual void onKeyPressed(sf::Event::KeyEvent key) {}
+
+	////////////////////////////////////////////////////////////
+	/// \brief Event triggered when a key is released
+	///
+	/// \param key Key event parameters
+	///
+	////////////////////////////////////////////////////////////
+	virtual void onKeyReleased(sf::Event::KeyEvent key) {}
+
+	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse wheel is scrolled
 	///
 	/// \param mouseWheelScroll Mouse wheel event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMouseWheelScrolled(sf::Event::MouseWheelScrollEvent mouseWheelScroll) override;
+	virtual void onMouseWheelScrolled(sf::Event::MouseWheelScrollEvent mouseWheelScroll);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is pressed
@@ -99,7 +122,7 @@ public:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMouseButtonPressed(sf::Event::MouseButtonEvent mouseButton) override;
+	virtual void onMouseButtonPressed(sf::Event::MouseButtonEvent mouseButton);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released
@@ -107,7 +130,7 @@ public:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMouseButtonReleased(sf::Event::MouseButtonEvent mouseButton) override;
+	virtual void onMouseButtonReleased(sf::Event::MouseButtonEvent mouseButton);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor moves
@@ -115,7 +138,7 @@ public:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMouseMoved(sf::Event::MouseMoveEvent mouseMove) override;
+	virtual void onMouseMoved(sf::Event::MouseMoveEvent mouseMove);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Draw the control to a render target
