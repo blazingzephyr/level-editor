@@ -24,34 +24,47 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef LEVEL_EDITOR_CONFIG_HPP
-#define LEVEL_EDITOR_CONFIG_HPP
-
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <functional>
+#include "LocalizableTextComponent.hpp"
 
 
 namespace le
 {
 ////////////////////////////////////////////////////////////
-/// \brief Alias for std::function representing an event raised within sender
-///
-////////////////////////////////////////////////////////////
-template <typename T>
-using Event0 = std::function<void(T& sender)>;
+LocalizableTextComponent::LocalizableTextComponent() :
+TextComponent::TextComponent(),
+m_string(),
+m_strings({ })
+{
+}
+
 
 ////////////////////////////////////////////////////////////
-/// \brief Alias for std::function representing an event with an argument raised within sender
-///
-////////////////////////////////////////////////////////////
-template <typename T, typename U>
-using Event1 = std::function<void(T& sender, U arg)>;
+LocalizableTextComponent::LocalizableTextComponent(const sf::Vector2f& position, const sf::Vector2u& size,
+const TextStyle* style, const Strings& strings, const sf::String& string, const sf::Vector2f& textOffset) :
 
-using Strings = std::map<sf::String, sf::String>;
+TextComponent::TextComponent(position, size, style, strings.at(string), textOffset),
+m_string(string),
+m_strings(strings)
+{
+}
+
+
+////////////////////////////////////////////////////////////
+void LocalizableTextComponent::setString(const sf::String& string)
+{
+	this->m_string = string;
+	applyTextChanges();
+}
+
+
+////////////////////////////////////////////////////////////
+void LocalizableTextComponent::applyTextChanges()
+{
+	sf::String text = this->m_strings.at(this->m_string);
+	TextComponent::setString(text);
+}
 
 } // namespace le
-
-
-#endif // LEVEL_EDITOR_CONFIG_HPP

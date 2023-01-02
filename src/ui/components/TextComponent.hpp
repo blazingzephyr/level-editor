@@ -58,10 +58,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
-	/// \param position Position of the text component
-	/// \param size Size of the text component
-	/// \param style Style to use. Has to remain valid the entire lifetime of the text component.
-	/// \param string String assigned to the text 
+	/// \param position   Position of the text component
+	/// \param size       Size of the text component
+	/// \param style      Style to use. Has to remain valid the entire lifetime of the text component
+	/// \param string     String assigned to the text 
 	/// \param textOffset Offset of the text towards the render texture
 	///
 	////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@ public:
     /// \param string New string
     ///
     ////////////////////////////////////////////////////////////
-	void setString(const sf::String& string);
+	virtual void setString(const sf::String& string);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Change the offset of the text
@@ -128,7 +128,8 @@ public:
 	////////////////////////////////////////////////////////////
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-private:
+protected:
+
 	////////////////////////////////////////////////////////////
 	/// \brief Align the text towards render texture
 	///
