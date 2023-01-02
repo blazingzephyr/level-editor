@@ -31,7 +31,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <functional>
-
+#include <map>
+#include <SFML/System/String.hpp>
 
 namespace le
 {
