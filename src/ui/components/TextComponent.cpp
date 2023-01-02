@@ -56,7 +56,7 @@ m_clearColor(sf::Color::Transparent),
 m_text(string, style ? *style->m_font : sf::Font()),
 m_textOffset(textOffset)
 {
-	this->m_renderTexture->create(std::min(1u, size.x), std::min(1u, size.y));
+	this->m_renderTexture->create(std::max(1u, size.x), std::max(1u, size.y));
 	setStyle(style);
 	setPosition(position);
 }
