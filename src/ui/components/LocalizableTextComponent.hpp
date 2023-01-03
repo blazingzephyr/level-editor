@@ -64,7 +64,7 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	LocalizableTextComponent(const sf::Vector2f& position, const sf::Vector2u& size, const TextStyle* style,
-	const Strings*, const sf::String& string, const sf::Vector2f& textOffset = sf::Vector2f());
+	const Strings* strings, const sf::String& string, const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
 	/// \brief Set the text's string
