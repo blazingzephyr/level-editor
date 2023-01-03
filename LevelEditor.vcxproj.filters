@@ -101,9 +101,6 @@
     <ClInclude Include="src\ui\controls\CheckBox.hpp">
       <Filter>Headers\Controls\Controls</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\interfaces\EventReceiver.hpp">
-      <Filter>Headers\Controls\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="src\ui\interfaces\Control.hpp">
       <Filter>Headers\Controls\Interfaces</Filter>
     </ClInclude>
@@ -125,5 +122,13 @@
     <ClInclude Include="src\ui\components\LocalizableTextComponent.hpp">
       <Filter>Headers\Controls\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\ui\controls\Slider.hpp">
+      <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ui\controls\Slider.inl">
+      <Filter>Source\Controls\Controls</Filter>
+    </None>
   </ItemGroup>
 </Project>

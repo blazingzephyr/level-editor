@@ -40,13 +40,19 @@
     <ClInclude Include="src\ui\controls\Button.hpp" />
     <ClInclude Include="src\ui\controls\CheckBox.hpp" />
     <ClInclude Include="src\ui\controls\ComboBox.hpp" />
+    <ClInclude Include="src\ui\controls\Slider.hpp" />
     <ClInclude Include="src\ui\interfaces\Control.hpp" />
-    <ClInclude Include="src\ui\interfaces\EventReceiver.hpp" />
     <ClInclude Include="src\ui\interfaces\SpriteBasedControl.hpp" />
     <ClInclude Include="src\ui\interfaces\TextBasedControl.hpp" />
     <ClInclude Include="src\ui\interfaces\Updatable.hpp" />
     <ClInclude Include="src\ui\styling\TextTheme.hpp" />
     <ClInclude Include="src\utility\Config.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ui\controls\Slider.inl">
+      <DeploymentContent>false</DeploymentContent>
+      <FileType>CppCode</FileType>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
