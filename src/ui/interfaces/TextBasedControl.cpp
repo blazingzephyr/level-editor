@@ -71,7 +71,7 @@ void TextBasedControl::draw(sf::RenderTarget& target, sf::RenderStates states) c
     SpriteBasedControl::draw(target, states);
     states.transform *= getTransform();
 
-    static auto draw = [&](auto& text) { target.draw(text, states); };
+    auto draw = [&](auto& text) { target.draw(text, states); };
     std::visit(draw, this->m_text);
 }
 
@@ -85,7 +85,7 @@ void TextBasedControl::setTextStyle(bool forceDefault)
                              (this->m_hovering) ? this->m_theme->m_hovered  :
                                                   this->m_theme->m_default;
 
-    static auto setStyle = [&](auto& text) { text.setStyle(style); };
+    auto setStyle = [&](auto& text) { text.setStyle(style); };
     std::visit(setStyle, this->m_text);
 }
 
