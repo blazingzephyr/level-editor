@@ -220,7 +220,7 @@ inline void Slider<T>::onScrolledControl(sf::Event::MouseWheelScrollEvent mouseW
 ////////////////////////////////////////////////////////////
 template<typename T>
 requires std::is_arithmetic_v<T>
-inline void Slider<T>::onPressed(sf::Event::MouseButtonEvent mouseButton)
+inline void Slider<T>::onPressed(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
 	this->m_isScrolling = false;
 }
@@ -229,7 +229,7 @@ inline void Slider<T>::onPressed(sf::Event::MouseButtonEvent mouseButton)
 ////////////////////////////////////////////////////////////
 template<typename T>
 requires std::is_arithmetic_v<T>
-inline void Slider<T>::onClicked(sf::Event::MouseButtonEvent mouseButton)
+inline void Slider<T>::onClicked(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
 	this->m_sprite.setUseAlt(true);
 }
@@ -238,7 +238,7 @@ inline void Slider<T>::onClicked(sf::Event::MouseButtonEvent mouseButton)
 ////////////////////////////////////////////////////////////
 template<typename T>
 requires std::is_arithmetic_v<T>
-inline void Slider<T>::onReleased(sf::Event::MouseButtonEvent mouseButton)
+inline void Slider<T>::onReleased(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
 	this->m_sprite.setUseAlt(false);
 

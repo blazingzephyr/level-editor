@@ -94,33 +94,33 @@ void CheckBox::onScrolledControl(sf::Event::MouseWheelScrollEvent mouseWheelScro
 
 
 ////////////////////////////////////////////////////////////
-void CheckBox::onClicked(sf::Event::MouseButtonEvent mouseButton)
+void CheckBox::onClicked(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
-	SpriteBasedControl::onClicked(mouseButton);
+	SpriteBasedControl::onClicked(button, worldPos);
 	setSprite(false);
 }
 
 
 ////////////////////////////////////////////////////////////
-void CheckBox::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
+void CheckBox::onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
-	SpriteBasedControl::onReleasedControl(mouseButton);
+	SpriteBasedControl::onReleasedControl(button, worldPos);
 	setChecked(!this->m_isChecked);
 }
 
 
 ////////////////////////////////////////////////////////////
-void CheckBox::onEntered(sf::Event::MouseMoveEvent mouseMove)
+void CheckBox::onEntered(sf::Vector2f worldPos)
 {
-	SpriteBasedControl::onEntered(mouseMove);
+	SpriteBasedControl::onEntered(worldPos);
 	setSprite(false);
 }
 
 
 ////////////////////////////////////////////////////////////
-void CheckBox::onLeft(sf::Event::MouseMoveEvent mouseMove)
+void CheckBox::onLeft(sf::Vector2f worldPos)
 {
-	SpriteBasedControl::onLeft(mouseMove);
+	SpriteBasedControl::onLeft(worldPos);
 	setSprite(true);
 }
 

@@ -108,7 +108,7 @@ private:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onClicked(sf::Event::MouseButtonEvent mouseButton) override;
+	void onClicked(sf::Mouse::Button button, sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released
@@ -117,7 +117,7 @@ private:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onReleasedControl(sf::Event::MouseButtonEvent mouseButton) override;
+	void onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor enters the area of the check box
@@ -125,7 +125,7 @@ private:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onEntered(sf::Event::MouseMoveEvent mouseMove) override;
+	void onEntered(sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor leaves the area of the check box
@@ -133,7 +133,7 @@ private:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onLeft(sf::Event::MouseMoveEvent mouseMove) override;
+	void onLeft(sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	// Member data

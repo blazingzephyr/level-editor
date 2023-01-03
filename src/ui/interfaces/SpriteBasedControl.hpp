@@ -91,7 +91,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onClicked(sf::Event::MouseButtonEvent mouseButton) override;
+	virtual void onClicked(sf::Mouse::Button button, sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released pressed while hovering
@@ -99,7 +99,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onReleasedControl(sf::Event::MouseButtonEvent mouseButton) override;
+	virtual void onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor enters the area of the control
@@ -107,7 +107,7 @@ protected:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onEntered(sf::Event::MouseMoveEvent mouseMove) override;
+	virtual void onEntered(sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor leaves the area of the control
@@ -115,7 +115,7 @@ protected:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onLeft(sf::Event::MouseMoveEvent mouseMove) override;
+	virtual void onLeft(sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	// Member data

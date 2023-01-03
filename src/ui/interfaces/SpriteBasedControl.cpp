@@ -62,21 +62,21 @@ void SpriteBasedControl::draw(sf::RenderTarget& target, sf::RenderStates states)
 
 
 ////////////////////////////////////////////////////////////
-void SpriteBasedControl::onClicked(sf::Event::MouseButtonEvent mouseButton)
+void SpriteBasedControl::onClicked(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
 	printf("SpriteBasedControl::onClicked IS NOT IMPLEMENTED\n");
 }
 
 
 ////////////////////////////////////////////////////////////
-void SpriteBasedControl::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
+void SpriteBasedControl::onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
 	printf("SpriteBasedControl::onReleasedControl IS NOT IMPLEMENTED\n");
 }
 
 
 ////////////////////////////////////////////////////////////
-void SpriteBasedControl::onEntered(sf::Event::MouseMoveEvent mouseMove)
+void SpriteBasedControl::onEntered(sf::Vector2f worldPos)
 {
 	this->m_shader = this->m_enabled ? nullptr_t() : nullptr_t();
 	printf("SpriteBasedControl::onEntered IS NOT IMPLEMENTED\n");
@@ -84,7 +84,7 @@ void SpriteBasedControl::onEntered(sf::Event::MouseMoveEvent mouseMove)
 
 
 ////////////////////////////////////////////////////////////
-void SpriteBasedControl::onLeft(sf::Event::MouseMoveEvent mouseMove)
+void SpriteBasedControl::onLeft(sf::Vector2f worldPos)
 {
 	this->m_shader = this->m_enabled ? nullptr : nullptr_t();
 	printf("SpriteBasedControl::onLeft IS NOT IMPLEMENTED\n");

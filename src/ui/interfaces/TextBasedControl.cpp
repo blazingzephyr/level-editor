@@ -91,28 +91,28 @@ void TextBasedControl::setTextStyle(bool forceDefault)
 
 
 ////////////////////////////////////////////////////////////
-void TextBasedControl::onClicked(sf::Event::MouseButtonEvent mouseButton)
+void TextBasedControl::onClicked(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
     setTextStyle();
 }
 
 
 ////////////////////////////////////////////////////////////
-void TextBasedControl::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
+void TextBasedControl::onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
     setTextStyle();
 }
 
 
 ////////////////////////////////////////////////////////////
-void TextBasedControl::onEntered(sf::Event::MouseMoveEvent mouseMove)
+void TextBasedControl::onEntered(sf::Vector2f worldPos)
 {
     setTextStyle();
 }
 
 
 ////////////////////////////////////////////////////////////
-void TextBasedControl::onLeft(sf::Event::MouseMoveEvent mouseMove)
+void TextBasedControl::onLeft(sf::Vector2f worldPos)
 {
     setTextStyle(true);
 }

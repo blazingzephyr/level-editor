@@ -61,34 +61,34 @@ void Button::onHold()
 
 
 ////////////////////////////////////////////////////////////
-void Button::onClicked(sf::Event::MouseButtonEvent mouseButton)
+void Button::onClicked(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
-	TextBasedControl::onClicked(mouseButton);
+	TextBasedControl::onClicked(button, worldPos);
 	this->m_sprite.setUseAlt(true);
 }
 
 
 ////////////////////////////////////////////////////////////
-void Button::onReleasedControl(sf::Event::MouseButtonEvent mouseButton)
+void Button::onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
-	TextBasedControl::onReleasedControl(mouseButton);
+	TextBasedControl::onReleasedControl(button, worldPos);
 	this->m_sprite.setUseAlt(false);
 	this->m_onReleased(*this);
 }
 
 
 ////////////////////////////////////////////////////////////
-void Button::onEntered(sf::Event::MouseMoveEvent mouseMove)
+void Button::onEntered(sf::Vector2f worldPos)
 {
-	TextBasedControl::onEntered(mouseMove);
+	TextBasedControl::onEntered(worldPos);
 	this->m_sprite.setUseAlt(this->m_holding);
 }
 
 
 ////////////////////////////////////////////////////////////
-void Button::onLeft(sf::Event::MouseMoveEvent mouseMove)
+void Button::onLeft(sf::Vector2f worldPos)
 {
-	TextBasedControl::onLeft(mouseMove);
+	TextBasedControl::onLeft(worldPos);
 	this->m_sprite.setUseAlt(false);
 }
 

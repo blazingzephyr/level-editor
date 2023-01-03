@@ -150,7 +150,7 @@ private:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onPressed(sf::Event::MouseButtonEvent mouseButton) override;
+	void onPressed(sf::Mouse::Button button, sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is pressed
@@ -159,7 +159,7 @@ private:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onClicked(sf::Event::MouseButtonEvent mouseButton) override;
+	void onClicked(sf::Mouse::Button button, sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released
@@ -167,7 +167,7 @@ private:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	void onReleased(sf::Event::MouseButtonEvent mouseButton) override;
+	void onReleased(sf::Mouse::Button button, sf::Vector2f worldPos) override;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor moves

@@ -83,6 +83,50 @@ void Control::update()
 }
 
 
+bool Control::onWindowEvent(sf::RenderWindow& window, sf::Event event)
+{
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+	sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+
+	bool isAccepted = true;
+	switch (event.type)
+	{
+		case sf::Event::TextEntered:
+			onTextEntered(event.text.unicode);
+			break;
+
+		case sf::Event::KeyPressed:
+			onKeyPressed(event.key);
+			break;
+
+		case sf::Event::KeyReleased:
+			onKeyReleased(event.key);
+			break;
+
+		case sf::Event::MouseWheelScrolled:
+			onMouseWheelScrolled(event.mouseWheelScroll);
+			break;
+
+		case sf::Event::MouseButtonPressed:
+			onMouseButtonPressed(event.mouseButton.button, worldPos);
+			break;
+
+		case sf::Event::MouseButtonReleased:
+			onMouseButtonReleased(event.mouseButton.button, worldPos);
+			break;
+
+		case sf::Event::MouseMoved:
+			onMouseMoved(worldPos);
+			break;
+
+		default:
+			isAccepted = false;
+			break;
+	}
+
+	return isAccepted;
+}
+
 ////////////////////////////////////////////////////////////
 void Control::onMouseWheelScrolled(sf::Event::MouseWheelScrollEvent mouseWheelScroll)
 {
@@ -94,31 +138,31 @@ void Control::onMouseWheelScrolled(sf::Event::MouseWheelScrollEvent mouseWheelSc
 
 
 ////////////////////////////////////////////////////////////
-void Control::onMouseButtonPressed(sf::Event::MouseButtonEvent mouseButton)
+void Control::onMouseButtonPressed(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
 	if (this->m_hovering)
 	{
-		this->m_holding = mouseButton.button == sf::Mouse::Left || mouseButton.button == sf::Mouse::Right;
+		this->m_holding = button == sf::Mouse::Left || button == sf::Mouse::Right;
 	}
 
 	if (this->m_enabled)
 	{
-		onPressed(mouseButton);
+		onPressed(button, worldPos);
 
 		if (this->m_holding)
 		{
-			onClicked(mouseButton);
+			onClicked(button, worldPos);
 		}
 		else
 		{
-			onUnclicked(mouseButton);
+			onUnclicked(button, worldPos);
 		}
 	}
 }
 
 
 ////////////////////////////////////////////////////////////
-void Control::onMouseButtonReleased(sf::Event::MouseButtonEvent mouseButton)
+void Control::onMouseButtonReleased(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
 	if (this->m_enabled)
 	{
@@ -127,11 +171,11 @@ void Control::onMouseButtonReleased(sf::Event::MouseButtonEvent mouseButton)
 
 		if (this->m_wasHolding)
 		{
-			onReleased(mouseButton);
+			onReleased(button, worldPos);
 			
 			if (this->m_hovering)
 			{
-				onReleasedControl(mouseButton);
+				onReleasedControl(button, worldPos);
 			}
 		}
 	}
@@ -139,28 +183,28 @@ void Control::onMouseButtonReleased(sf::Event::MouseButtonEvent mouseButton)
 
 
 ////////////////////////////////////////////////////////////
-void Control::onMouseMoved(sf::Event::MouseMoveEvent mouseMove)
+void Control::onMouseMoved(sf::Vector2f worldPos)
 {
 	if (this->m_enabled)
 	{
-		bool hovering = contains(static_cast<float>(mouseMove.x), static_cast<float>(mouseMove.y));
+		bool hovering = contains(worldPos.x, worldPos.y);
 		if (this->m_hovering != hovering)
 		{
 			this->m_hovering = hovering;
 
 			if (hovering)
 			{
-				onEntered(mouseMove);
+				onEntered(worldPos);
 			}
 			else
 			{
-				onLeft(mouseMove);
+				onLeft(worldPos);
 			}
 		}
 
 		if (this->m_holding)
 		{
-			onMovedControl(mouseMove);
+			onMovedControl(worldPos);
 		}
 	}
 }

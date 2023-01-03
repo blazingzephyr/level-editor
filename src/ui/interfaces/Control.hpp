@@ -34,6 +34,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 
 namespace le
@@ -94,6 +95,15 @@ public:
 	virtual void update() override;
 
 	////////////////////////////////////////////////////////////
+	/// \brief Process sf::Event within the control
+	///
+	/// \param window Respective window
+	/// \param event  Event that was triggered
+	///
+	////////////////////////////////////////////////////////////
+	virtual bool onWindowEvent(sf::RenderWindow& window, sf::Event event);
+
+	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a character is entered
 	///
 	/// \param unicode UTF-32 Unicode value of the character
@@ -131,7 +141,7 @@ public:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMouseButtonPressed(sf::Event::MouseButtonEvent mouseButton);
+	virtual void onMouseButtonPressed(sf::Mouse::Button button, sf::Vector2f worldPos);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released
@@ -139,7 +149,7 @@ public:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMouseButtonReleased(sf::Event::MouseButtonEvent mouseButton);
+	virtual void onMouseButtonReleased(sf::Mouse::Button button, sf::Vector2f worldPos);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor moves
@@ -147,7 +157,7 @@ public:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMouseMoved(sf::Event::MouseMoveEvent mouseMove);
+	virtual void onMouseMoved(sf::Vector2f worldPos);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Draw the control to a render target
@@ -185,7 +195,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onPressed(sf::Event::MouseButtonEvent mouseButton) {}
+	virtual void onPressed(sf::Mouse::Button button, sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is pressed
@@ -194,7 +204,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onClicked(sf::Event::MouseButtonEvent mouseButton) {}
+	virtual void onClicked(sf::Mouse::Button button, sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is pressed
@@ -203,7 +213,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onUnclicked(sf::Event::MouseButtonEvent mouseButton) {}
+	virtual void onUnclicked(sf::Mouse::Button button, sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released
@@ -211,7 +221,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onReleased(sf::Event::MouseButtonEvent mouseButton) {}
+	virtual void onReleased(sf::Mouse::Button button, sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when a mouse button is released
@@ -220,7 +230,7 @@ protected:
 	/// \param mouseButton Mouse button event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onReleasedControl(sf::Event::MouseButtonEvent mouseButton) {}
+	virtual void onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor moves
@@ -229,7 +239,7 @@ protected:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onMovedControl(sf::Event::MouseMoveEvent mouseMove) {}
+	virtual void onMovedControl(sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor enters the area of the control
@@ -237,7 +247,7 @@ protected:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onEntered(sf::Event::MouseMoveEvent mouseMove) {}
+	virtual void onEntered(sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event triggered when the mouse cursor leaves the area of the control
@@ -245,7 +255,7 @@ protected:
 	/// \param mouseMove Mouse move event parameters
 	///
 	////////////////////////////////////////////////////////////
-	virtual void onLeft(sf::Event::MouseMoveEvent mouseMove) {}
+	virtual void onLeft(sf::Vector2f worldPos) {}
 
 	////////////////////////////////////////////////////////////
 	// Member data
