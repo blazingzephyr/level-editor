@@ -63,6 +63,21 @@ m_textOffset(textOffset)
 
 
 ////////////////////////////////////////////////////////////
+sf::FloatRect TextComponent::getLocalBounds() const
+{
+	return this->m_text.getLocalBounds();
+}
+
+
+////////////////////////////////////////////////////////////
+sf::FloatRect TextComponent::getGlobalBounds() const
+{
+	sf::FloatRect rect = this->m_text.getLocalBounds();
+	return getTransform().transformRect(rect);
+}
+
+
+////////////////////////////////////////////////////////////
 void TextComponent::setString(const sf::String& string)
 {
 	this->m_text.setString(string);
