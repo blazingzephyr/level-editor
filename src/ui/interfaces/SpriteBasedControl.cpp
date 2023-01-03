@@ -42,7 +42,7 @@ m_sprite()
 
 
 ////////////////////////////////////////////////////////////
-SpriteBasedControl::SpriteBasedControl(sf::Vector2f position, sf::Vector2f size, const sf::Texture& texture, 
+SpriteBasedControl::SpriteBasedControl(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture,
 const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt, bool useAlt, bool enabled) :
 
 Control::Control(position, size, enabled),

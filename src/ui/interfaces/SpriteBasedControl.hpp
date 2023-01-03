@@ -65,7 +65,7 @@ public:
 	/// \param enable        Enable this control
 	/// 
 	////////////////////////////////////////////////////////////
-	SpriteBasedControl(sf::Vector2f position, sf::Vector2f size, const sf::Texture& texture,
+	SpriteBasedControl(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture,
 	const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt, bool useAlt, bool enabled);
 
 	////////////////////////////////////////////////////////////
