@@ -67,6 +67,13 @@ bool Control::contains(float x, float y) const
 
 
 ////////////////////////////////////////////////////////////
+void Control::setEnabled(bool enabled)
+{
+	this->m_enabled = enabled;
+}
+
+
+////////////////////////////////////////////////////////////
 void Control::update()
 {
 	if (this->m_enabled && this->m_hovering && this->m_holding)
