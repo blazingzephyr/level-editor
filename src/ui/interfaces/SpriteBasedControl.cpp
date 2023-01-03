@@ -53,6 +53,15 @@ m_sprite(sf::Vector2f(), texture, spriteDefault, spriteAlt, useAlt)
 
 
 ////////////////////////////////////////////////////////////
+bool SpriteBasedControl::contains(float x, float y) const
+{
+	sf::FloatRect spriteRect = this->m_sprite.getLocalBounds();
+	sf::Transform transform = getParentTransform() * getTransform();
+	return transform.transformRect(spriteRect).contains(x, y);
+}
+
+
+////////////////////////////////////////////////////////////
 void SpriteBasedControl::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();

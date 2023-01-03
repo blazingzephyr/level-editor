@@ -63,6 +63,21 @@ m_spriteAlt    (spriteAlt ? std::make_optional<sf::Sprite>(texture, *spriteAlt) 
 
 
 ////////////////////////////////////////////////////////////
+sf::FloatRect SpriteComponent::getLocalBounds() const
+{
+	return this->m_spriteCurrent->getLocalBounds();
+}
+
+
+////////////////////////////////////////////////////////////
+sf::FloatRect SpriteComponent::getGlobalBounds() const
+{
+	sf::FloatRect bounds = this->m_spriteCurrent->getLocalBounds();
+	return getTransform().transformRect(bounds);
+}
+
+
+////////////////////////////////////////////////////////////
 void SpriteComponent::setUseAlt(bool useAlt)
 {
 	this->m_useAlt = this->m_spriteAlt && useAlt;

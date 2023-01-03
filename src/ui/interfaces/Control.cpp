@@ -56,13 +56,29 @@ m_wasHolding(false)
 
 
 ////////////////////////////////////////////////////////////
+const sf::Transform& Control::getParentTransform() const
+{
+	sf::Transform combinedTransform = sf::Transform::Identity;
+	std::function<void(const Control*)> getParentTransform = [&](const Control* parent)
+	{
+		if (parent != nullptr)
+		{
+			combinedTransform *= parent->getTransform();
+			getParentTransform(parent->m_parent);
+		}
+	};
+
+	getParentTransform(this->m_parent);
+	return combinedTransform;
+}
+
+
+////////////////////////////////////////////////////////////
 bool Control::contains(float x, float y) const
 {
 	sf::Vector2f position = getPosition();
-	return x >= position.x
-		&& x <= position.x + this->m_size.x
-		&& y >= position.y
-		&& y <= position.y + this->m_size.y;
+	sf::FloatRect rect = sf::FloatRect(position.x, position.y, this->m_size.x, this->m_size.y);
+	return getParentTransform().transformRect(rect).contains(x, y);
 }
 
 
@@ -70,6 +86,13 @@ bool Control::contains(float x, float y) const
 void Control::setEnabled(bool enabled)
 {
 	this->m_enabled = enabled;
+}
+
+
+////////////////////////////////////////////////////////////
+void Control::setParent(const Control* parent)
+{
+	this->m_parent = parent;
 }
 
 

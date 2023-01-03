@@ -78,6 +78,34 @@ public:
 	std::optional<const sf::IntRect> spriteAlt, bool useAlt = false);
 
 	////////////////////////////////////////////////////////////
+	/// \brief Get the local bounding rectangle of the entity
+	///
+	/// The returned rectangle is in local coordinates, which means
+	/// that it ignores the transformations (translation, rotation,
+	/// scale, ...) that are applied to the entity.
+	/// In other words, this function returns the bounds of the
+	/// entity in the entity's coordinate system.
+	///
+	/// \return Local bounding rectangle of the entity
+	///
+	////////////////////////////////////////////////////////////
+	sf::FloatRect getLocalBounds() const;
+
+	////////////////////////////////////////////////////////////
+	/// \brief Get the global bounding rectangle of the entity
+	///
+	/// The returned rectangle is in global coordinates, which means
+	/// that it takes into account the transformations (translation,
+	/// rotation, scale, ...) that are applied to the entity.
+	/// In other words, this function returns the bounds of the
+	/// sprite in the global 2D world's coordinate system.
+	///
+	/// \return Global bounding rectangle of the entity
+	///
+	////////////////////////////////////////////////////////////
+	sf::FloatRect getGlobalBounds() const;
+
+	////////////////////////////////////////////////////////////
 	/// \brief Switch between the default and the alternative sprites.
 	///
 	/// If the alternative sprite was not provided, SpriteComponent uses the default sprite regardless of the provided value.

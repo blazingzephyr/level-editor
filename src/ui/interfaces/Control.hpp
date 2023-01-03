@@ -31,6 +31,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "Updatable.hpp"
+#include <functional>
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Window/Event.hpp>
@@ -72,13 +73,19 @@ public:
     virtual ~Control() {}
 
 	////////////////////////////////////////////////////////////
+	/// \brief Get the combined parent transform of the control
+	/// 
+	////////////////////////////////////////////////////////////
+	const sf::Transform& getParentTransform() const;
+
+	////////////////////////////////////////////////////////////
 	/// \brief Checks whether a point intersects the control
 	///
 	/// \param x X coord
 	/// \param y Y coord
 	/// 
 	////////////////////////////////////////////////////////////
-	bool contains(float x, float y) const;
+	virtual bool contains(float x, float y) const;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Enables or disabled the control
@@ -87,6 +94,14 @@ public:
 	/// 
 	////////////////////////////////////////////////////////////
 	virtual void setEnabled(bool enabled);
+
+	////////////////////////////////////////////////////////////
+	/// \brief Sets parent control.
+	///
+	/// \param parent Parent control
+	/// 
+	////////////////////////////////////////////////////////////
+	void setParent(const Control* parent);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Updates the control within the application's main thread loop
@@ -260,11 +275,12 @@ protected:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	bool         m_enabled;    //!< Enable input validation
-	sf::Vector2f m_size;       //!< Size of this control's bounds
-	bool         m_hovering;   //!< Mouse hovering over this control
-	bool         m_holding;    //!< Mouse is being held over this control
-	bool         m_wasHolding; //!< Previous mouse holding state
+	const Control* m_parent;    //!< Parent control intended
+	bool           m_enabled;    //!< Enable input validation
+	sf::Vector2f   m_size;       //!< Size of this control's bounds
+	bool           m_hovering;   //!< Mouse hovering over this control
+	bool           m_holding;    //!< Mouse is being held over this control
+	bool           m_wasHolding; //!< Previous mouse holding state
 };
 
 } //namespace le

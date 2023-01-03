@@ -75,6 +75,15 @@ public:
 	virtual ~SpriteBasedControl() {}
 
 	////////////////////////////////////////////////////////////
+	/// \brief Checks whether a point intersects the control
+	///
+	/// \param x X coord
+	/// \param y Y coord
+	/// 
+	////////////////////////////////////////////////////////////
+	bool contains(float x, float y) const override;
+
+	////////////////////////////////////////////////////////////
 	/// \brief Draw this sprite-based control to a render target.
 	///
 	/// \param target Render target to draw to
