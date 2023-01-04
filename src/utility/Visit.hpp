@@ -108,6 +108,40 @@ Result visit(Result(Expected::* method)(Args...) const, std::variant<Input...> v
 	return std::visit(method, variant, std::variant<Args...>(args...));
 }
 
+
+////////////////////////////////////////////////////////////
+/// \brief Alias for simplified std::visit call
+///
+/// \typeparam Expected Expected function type
+/// \typeparam Result   Return type of the function
+/// \typeparam Input    Input variant
+/// \typeparam Args     Function arguments
+/// 
+////////////////////////////////////////////////////////////
+template <typename Expected, typename Result, typename... Input, typename... Args>
+requires are_similar_v<Expected, Input...>
+Result visit(Result(Expected::* method)(Args...), std::variant<Input...> variant, Args&&... args)
+{
+	return std::visit(method, variant, std::variant<Args...>(args...));
+}
+
+
+////////////////////////////////////////////////////////////
+/// \brief Alias for simplified std::visit call
+///
+/// \typeparam Expected Expected function type
+/// \typeparam Result   Return type of the function
+/// \typeparam Input    Input variant
+/// \typeparam Args     Function arguments
+/// 
+////////////////////////////////////////////////////////////
+template <typename Expected, typename Result, typename... Input, typename... Args>
+requires are_similar_v<Expected, Input...>
+Result visit(Result(Expected::* method)(Args...) const, std::variant<Input...> variant, Args&&... args)
+{
+	return std::visit(method, variant, std::variant<Args...>(args...));
+}
+
 } // namespace le
 
 
