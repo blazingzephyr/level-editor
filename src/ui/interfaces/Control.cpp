@@ -34,6 +34,8 @@ namespace le
 {
 ////////////////////////////////////////////////////////////
 Control::Control() :
+m_window(nullptr),
+m_parent(nullptr),
 m_enabled(false),
 m_size(),
 m_hovering(false),
@@ -45,6 +47,8 @@ m_wasHolding(false)
 
 ////////////////////////////////////////////////////////////
 Control::Control(sf::Vector2f position, sf::Vector2f size, bool enabled) :
+m_window(nullptr),
+m_parent(nullptr),
 m_enabled(enabled),
 m_size(size),
 m_hovering(false),
