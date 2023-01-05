@@ -69,6 +69,37 @@ public:
 	const sf::String& string = sf::String(), const sf::Vector2f& textOffset = sf::Vector2f());
 
 	////////////////////////////////////////////////////////////
+	/// \brief Return the position of the \a index-th character
+	///
+	/// This function computes the visual position of a character
+	/// from its index in the string. The returned position is
+	/// in global coordinates (translation, rotation, scale and
+	/// origin are applied).
+	/// If \a index is out of range, the position of the end of
+	/// the string is returned.
+	///
+	/// \param index Index of the character
+	///
+	/// \return Position of the character
+	///
+	////////////////////////////////////////////////////////////
+	sf::Vector2f findCharacterPos(std::size_t index) const;
+
+	////////////////////////////////////////////////////////////
+	/// \brief Get the position of the text
+	///
+	/// The returned value is in local coordinates, which means
+	/// that it ignores the transformations (translation, rotation,
+	/// scale, ...) that are applied to the entity.
+	/// In other words, this function returns the bounds of the
+	/// entity in the entity's coordinate system.
+	///
+	/// \return Local bounding rectangle of the entity
+	///
+	////////////////////////////////////////////////////////////
+	const sf::Vector2f& getTextPosition() const;
+
+	////////////////////////////////////////////////////////////
 	/// \brief Get the local bounding rectangle of the entity
 	///
 	/// The returned rectangle is in local coordinates, which means
@@ -121,6 +152,17 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	void setTextOffset(const sf::Vector2f& offset);
+
+	////////////////////////////////////////////////////////////
+	/// \brief Move the text by a given offset
+	///
+	/// This function adds to the current offset of the text.
+	///
+	/// \param offsetX X offset
+	/// \param offsetX Y offset
+	///
+	////////////////////////////////////////////////////////////
+	void moveText(float offsetX, float offsetY);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Set the render texture's clear color

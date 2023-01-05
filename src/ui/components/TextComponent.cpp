@@ -63,6 +63,20 @@ m_textOffset(textOffset)
 
 
 ////////////////////////////////////////////////////////////
+sf::Vector2f TextComponent::findCharacterPos(std::size_t index) const
+{
+	return this->m_text.findCharacterPos(index);
+}
+
+
+////////////////////////////////////////////////////////////
+const sf::Vector2f& TextComponent::getTextPosition() const
+{
+	return this->m_text.getPosition();
+}
+
+
+////////////////////////////////////////////////////////////
 sf::FloatRect TextComponent::getLocalBounds() const
 {
 	return this->m_text.getLocalBounds();
@@ -90,6 +104,16 @@ void TextComponent::setTextOffset(const sf::Vector2f& offset)
 {
 	this->m_textOffset = offset;
 	alignText();
+}
+
+
+////////////////////////////////////////////////////////////
+void TextComponent::moveText(float offsetX, float offsetY)
+{
+	this->m_text.move(offsetX, offsetY);
+	this->m_textOffset.x += offsetX;
+	this->m_textOffset.y += offsetY;
+	displayRenderTexture();
 }
 
 
