@@ -78,6 +78,13 @@ const sf::Transform& Control::getParentTransform() const
 
 
 ////////////////////////////////////////////////////////////
+const sf::Transform& Control::getCombinedTransform() const
+{
+	return getParentTransform() * getTransform();
+}
+
+
+////////////////////////////////////////////////////////////
 bool Control::contains(float x, float y) const
 {
 	sf::Vector2f position = getPosition();
