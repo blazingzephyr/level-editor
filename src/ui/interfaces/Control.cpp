@@ -90,7 +90,7 @@ void Control::setEnabled(bool enabled)
 
 
 ////////////////////////////////////////////////////////////
-void Control::setParent(const Control* parent)
+void Control::setParent(Control* parent)
 {
 	this->m_parent = parent;
 }
@@ -112,6 +112,8 @@ bool Control::onWindowEvent(sf::RenderWindow& window, sf::Event event)
 	sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
 	bool isAccepted = true;
+	this->m_window = &window;
+
 	switch (event.type)
 	{
 		case sf::Event::TextEntered:

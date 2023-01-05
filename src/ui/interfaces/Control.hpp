@@ -101,7 +101,7 @@ public:
 	/// \param parent Parent control
 	/// 
 	////////////////////////////////////////////////////////////
-	void setParent(const Control* parent);
+	void setParent(Control* parent);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Updates the control within the application's main thread loop
@@ -275,7 +275,8 @@ protected:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	const Control* m_parent;    //!< Parent control intended
+	sf::Window*    m_window;     //!< Last window this control has been draw on
+	Control*       m_parent;     //!< Parent control
 	bool           m_enabled;    //!< Enable input validation
 	sf::Vector2f   m_size;       //!< Size of this control's bounds
 	bool           m_hovering;   //!< Mouse hovering over this control
