@@ -108,6 +108,13 @@ void TextComponent::setTextOffset(const sf::Vector2f& offset)
 
 
 ////////////////////////////////////////////////////////////
+void TextComponent::resetTextOffset()
+{
+	setTextOffset(sf::Vector2f(0, 0));
+}
+
+
+////////////////////////////////////////////////////////////
 void TextComponent::moveText(float offsetX, float offsetY)
 {
 	this->m_text.move(offsetX, offsetY);

@@ -154,6 +154,12 @@ public:
 	void setTextOffset(const sf::Vector2f& offset);
 
 	////////////////////////////////////////////////////////////
+	/// \brief Change the offset of the text to sf::Vector2f(0, 0)
+	///
+	////////////////////////////////////////////////////////////
+	void resetTextOffset();
+
+	////////////////////////////////////////////////////////////
 	/// \brief Move the text by a given offset
 	///
 	/// This function adds to the current offset of the text.
