@@ -33,7 +33,6 @@
 #include "SpriteBasedControl.hpp"
 #include "../components/LocalizableTextComponent.hpp"
 #include "../styling/TextTheme.hpp"
-#include <variant>
 
 
 namespace le
@@ -139,8 +138,8 @@ protected:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	std::variant<LocalizableTextComponent, TextComponent> m_text;  //!< Text drawn in TextBasedControl::draw
-	const TextTheme*                                      m_theme; //!< Collection of styles passed into m_text
+	TextComponent    m_text;  //!< Text drawn in TextBasedControl::draw
+	const TextTheme* m_theme; //!< Collection of styles passed into m_text
 };
 
 } //namespace le

@@ -55,13 +55,11 @@ m_theme        (textTheme)
 ////////////////////////////////////////////////////////////
 void TextBasedControl::applyTextChanges()
 {
-    struct Caller
+    LocalizableTextComponent* localizable = dynamic_cast<LocalizableTextComponent*>(&this->m_text);
+    if (localizable)
     {
-        void operator()(LocalizableTextComponent& lc) { lc.applyTextChanges(); }
-        void operator()(TextComponent&)               { }
-    };
-
-    std::visit(Caller {}, this->m_text);
+        localizable->applyTextChanges();
+    }
 }
 
 
@@ -70,9 +68,7 @@ void TextBasedControl::draw(sf::RenderTarget& target, sf::RenderStates states) c
 {
     SpriteBasedControl::draw(target, states);
     states.transform *= getTransform();
-
-    auto draw = [&](auto& text) { target.draw(text, states); };
-    std::visit(draw, this->m_text);
+    target.draw(this->m_text, states);
 }
 
 
@@ -85,8 +81,7 @@ void TextBasedControl::setTextStyle(bool forceDefault)
                              (this->m_hovering) ? this->m_theme->m_hovered  :
                                                   this->m_theme->m_default;
 
-    auto setStyle = [&](auto& text) { text.setStyle(style); };
-    std::visit(setStyle, this->m_text);
+    this->m_text.setStyle(style);
 }
 
 
