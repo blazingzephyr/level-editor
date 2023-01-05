@@ -86,8 +86,9 @@ sf::FloatRect TextComponent::getLocalBounds() const
 ////////////////////////////////////////////////////////////
 sf::FloatRect TextComponent::getGlobalBounds() const
 {
-	sf::FloatRect rect = this->m_text.getLocalBounds();
-	return getTransform().transformRect(rect);
+	sf::Transform transform = getTransform();
+	sf::FloatRect bounds = this->m_text.getGlobalBounds();
+	return transform.transformRect(bounds);
 }
 
 
