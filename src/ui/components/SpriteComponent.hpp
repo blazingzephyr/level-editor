@@ -78,6 +78,14 @@ public:
 	std::optional<const sf::IntRect> spriteAlt, bool useAlt = false);
 
 	////////////////////////////////////////////////////////////
+	/// \brief Get the currently used sprite
+	///
+	/// Only for data checking.
+	///
+	////////////////////////////////////////////////////////////
+	const sf::Sprite& getCurrent() const;
+
+	////////////////////////////////////////////////////////////
 	/// \brief Get the local bounding rectangle of the entity
 	///
 	/// The returned rectangle is in local coordinates, which means
@@ -129,7 +137,6 @@ private:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	const sf::Sprite*         m_spriteCurrent; //!< Pointer to the currenly used sprite. The object pointed by this shall not be modified.
 	sf::Sprite                m_spriteDefault; //!< Default sprite
 	std::optional<sf::Sprite> m_spriteAlt;     //!< Optional alternative sprite. Is initialized only if the corresponding sf::IntRect was provided
 	bool                      m_useAlt;        //!< Indicates whether to use the alternative sprite or not

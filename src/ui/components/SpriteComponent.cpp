@@ -35,19 +35,19 @@ namespace le
 ////////////////////////////////////////////////////////////
 SpriteComponent::SpriteComponent() :
 m_spriteDefault(),
-m_spriteAlt    (std::nullopt)
+m_spriteAlt    (std::nullopt),
+m_useAlt       (false)
 {
-	setUseAlt(false);
 }
 
 
 ////////////////////////////////////////////////////////////
 SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture, const sf::IntRect& sprite) :
 m_spriteDefault(texture, sprite),
-m_spriteAlt    (std::nullopt)
+m_spriteAlt    (std::nullopt),
+m_useAlt       (false)
 {
 	setPosition(position);
-	setUseAlt(false);
 }
 
 
@@ -55,24 +55,31 @@ m_spriteAlt    (std::nullopt)
 SpriteComponent::SpriteComponent(const sf::Vector2f& position, const sf::Texture& texture,
 const sf::IntRect& spriteDefault, std::optional<const sf::IntRect> spriteAlt, bool useAlt) :
 m_spriteDefault(texture, spriteDefault),
-m_spriteAlt    (spriteAlt ? std::make_optional<sf::Sprite>(texture, *spriteAlt) : std::nullopt)
+m_spriteAlt    (spriteAlt ? std::make_optional<sf::Sprite>(texture, *spriteAlt) : std::nullopt),
+m_useAlt       (useAlt)
 {
 	setPosition(position);
-	setUseAlt(useAlt);
+}
+
+
+////////////////////////////////////////////////////////////
+const sf::Sprite& SpriteComponent::getCurrent() const
+{
+	return this->m_useAlt ? *this->m_spriteAlt : this->m_spriteDefault;
 }
 
 
 ////////////////////////////////////////////////////////////
 sf::FloatRect SpriteComponent::getLocalBounds() const
 {
-	return this->m_spriteCurrent->getLocalBounds();
+	return getCurrent().getLocalBounds();
 }
 
 
 ////////////////////////////////////////////////////////////
 sf::FloatRect SpriteComponent::getGlobalBounds() const
 {
-	sf::FloatRect bounds = this->m_spriteCurrent->getLocalBounds();
+	sf::FloatRect bounds = getCurrent().getLocalBounds();
 	return getTransform().transformRect(bounds);
 }
 
@@ -81,7 +88,6 @@ sf::FloatRect SpriteComponent::getGlobalBounds() const
 void SpriteComponent::setUseAlt(bool useAlt)
 {
 	this->m_useAlt = this->m_spriteAlt && useAlt;
-	this->m_spriteCurrent = this->m_useAlt ? std::to_address(this->m_spriteAlt) : &this->m_spriteDefault;
 }
 
 
@@ -89,7 +95,7 @@ void SpriteComponent::setUseAlt(bool useAlt)
 void SpriteComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	target.draw(*this->m_spriteCurrent, states);
+	target.draw(getCurrent(), states);
 }
 
 } //namespace le
