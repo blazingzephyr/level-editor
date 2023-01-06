@@ -46,7 +46,7 @@ LocalizableTextComponent::LocalizableTextComponent(const sf::Vector2f& position,
 const TextStyle* style, const Strings* strings, const sf::String& string, const sf::Vector2f& textOffset) :
 
 TextComponent::TextComponent(position, size, style, L"", textOffset),
-m_strings(strings ? strings : new Strings())
+m_strings(strings)
 {
 	LocalizableTextComponent::setString(string);
 }
@@ -63,7 +63,7 @@ void LocalizableTextComponent::setString(const sf::String& string)
 ////////////////////////////////////////////////////////////
 void LocalizableTextComponent::applyTextChanges()
 {
-	if (this->m_strings->contains(this->m_string))
+	if (this->m_strings && this->m_strings->contains(this->m_string))
 	{
 		sf::String text = this->m_strings->at(this->m_string);
 		TextComponent::setString(text);
