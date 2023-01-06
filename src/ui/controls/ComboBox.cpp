@@ -42,11 +42,7 @@ m_buttonRight(),
 m_items(),
 m_item(),
 m_index(0),
-m_clock(),
-m_restart(false),
-m_elapsed(0),
-m_scrollTime(0),
-m_holdingButton(false)
+m_secondaryButtons()
 {
 }
 
@@ -57,20 +53,14 @@ const sf::IntRect& spriteDefault, const sf::IntRect& spriteActive, const TextSty
 const Strings* strings, const Items& items, size_t index, int scrollTime, Event1<ComboBox, size_t> onItemChanged, bool enabled) :
 
 Control::Control(position, size, enabled),
-m_buttonLeft(sf::Vector2f(buttonSize.x * 1, size.y / 2), buttonSize, texture, spriteDefault, spriteActive,
-theme, strings, L"", [this](Button&) { onReleasedButton(-1); }, [this](Button&) { onHoldButton(-1); }, enabled),
-
-m_buttonRight(sf::Vector2f(size.x - buttonSize.x, size.y / 2), buttonSize, texture, spriteDefault, spriteActive,
-theme, strings, L"", [this](Button&) { onReleasedButton(1); }, [this](Button&) { onHoldButton(1); }, enabled),
 
 m_text(sf::Vector2f(), sf::Vector2u(size), style, strings, items[index]),
 m_onItemChanged(onItemChanged),
 m_items(items),
-m_clock(),
-m_restart(false),
-m_elapsed(0),
-m_scrollTime(scrollTime),
-m_holdingButton(false)
+m_secondaryButtons(
+	&m_buttonLeft, &m_buttonRight, sf::Vector2f(buttonSize.x, size.y / 2), sf::Vector2f(size.x - buttonSize.x, size.y / 2),
+	buttonSize, texture, spriteDefault, spriteActive, theme, enabled, scrollTime, [this](int8_t summand) { moveIndex(summand); }
+)
 {
 	this->m_buttonLeft.setOrigin(0, buttonSize.y / 2);
 	this->m_buttonLeft.setScale(-1, 1);
@@ -161,33 +151,6 @@ void ComboBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(this->m_text, states);
 	target.draw(this->m_buttonLeft, states);
 	target.draw(this->m_buttonRight, states);
-}
-
-
-////////////////////////////////////////////////////////////
-void ComboBox::onReleasedButton(int8_t summand)
-{
-	this->m_elapsed = m_clock.getElapsedTime().asMilliseconds();
-	if (!m_holdingButton || this->m_elapsed >= this->m_scrollTime)
-	{
-		this->m_holdingButton = false;
-		m_clock.restart();
-		moveIndex(summand);
-	}
-}
-
-
-////////////////////////////////////////////////////////////
-void ComboBox::onHoldButton(int8_t summand)
-{	
-	this->m_holdingButton = true;
-	this->m_elapsed = m_clock.getElapsedTime().asMilliseconds();
-
-	if (this->m_elapsed >= this->m_scrollTime)
-	{
-		m_clock.restart();
-		moveIndex(summand);
-	}
 }
 
 

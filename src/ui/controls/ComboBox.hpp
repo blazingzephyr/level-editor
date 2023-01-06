@@ -31,7 +31,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "Button.hpp"
-#include <SFML/System/Clock.hpp>
+#include "../components/SecondaryButtonComponent.hpp"
 
 
 namespace le
@@ -143,22 +143,6 @@ public:
 private:
 
 	////////////////////////////////////////////////////////////
-	/// \brief Event raised when a child button is released
-	///
-	/// \param summand 1 to move right, -1 to move left
-	/// 
-	////////////////////////////////////////////////////////////
-	void onReleasedButton(int8_t summand);
-
-	////////////////////////////////////////////////////////////
-	/// \brief Event raised when a child button is held
-	/// 
-	/// \param summand 1 to move right, -1 to move left
-	/// 
-	////////////////////////////////////////////////////////////
-	void onHoldButton(int8_t summand);
-
-	////////////////////////////////////////////////////////////
 	/// \brief Moves index left or right
 	/// 
 	/// \param summand 1 to move right, -1 to move left
@@ -169,18 +153,14 @@ private:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	LocalizableTextComponent m_text;          //!< Text component
-	Event1<ComboBox, size_t> m_onItemChanged; //!< Event raised when another item is selected
-	Button                   m_buttonLeft;    //!< Leftmost button of the combo box
-	Button                   m_buttonRight;   //!< Rightmost button of the combo box
-	Items                    m_items;         //!< Combo box items
-	sf::String               m_item;          //!< Selected item of the combo box
-	size_t                   m_index;         //!< Index of the selected item
-	sf::Clock                m_clock;         //!< Internal clock for validating holding
-	bool                     m_restart;       //!< Determines if the clock should be restarted
-	int                      m_elapsed;       //!< Elapsed time of the clock;
-	int                      m_scrollTime;    //!< Amount of time required to scroll through the items
-	bool                     m_holdingButton; //!< Determines if a button was held
+	LocalizableTextComponent m_text;             //!< Text component
+	Event1<ComboBox, size_t> m_onItemChanged;    //!< Event raised when another item is selected
+	Button                   m_buttonLeft;       //!< Leftmost button of the combo box
+	Button                   m_buttonRight;      //!< Rightmost button of the combo box
+	Items                    m_items;            //!< Combo box items
+	sf::String               m_item;             //!< Selected item of the combo box
+	size_t                   m_index;            //!< Index of the selected item
+	SecondaryButtonComponent m_secondaryButtons; //!< Initialization logic of the additional combo box's buttons
 };
 
 } //namespace le
