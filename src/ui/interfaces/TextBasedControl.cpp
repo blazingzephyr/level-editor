@@ -88,6 +88,7 @@ void TextBasedControl::setTextStyle(bool forceDefault)
 ////////////////////////////////////////////////////////////
 void TextBasedControl::onClicked(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
+    SpriteBasedControl::onClicked(button, worldPos);
     setTextStyle();
 }
 
@@ -95,6 +96,7 @@ void TextBasedControl::onClicked(sf::Mouse::Button button, sf::Vector2f worldPos
 ////////////////////////////////////////////////////////////
 void TextBasedControl::onReleasedControl(sf::Mouse::Button button, sf::Vector2f worldPos)
 {
+    SpriteBasedControl::onReleasedControl(button, worldPos);
     setTextStyle();
 }
 
