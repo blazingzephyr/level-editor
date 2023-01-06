@@ -87,6 +87,9 @@
     <ClCompile Include="src\ui\controls\InputControl.cpp">
       <Filter>Source\Controls\Controls</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\components\SecondaryButtonComponent.cpp">
+      <Filter>Source\Controls\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\interfaces\Updatable.hpp">
@@ -134,9 +137,18 @@
     <ClInclude Include="src\ui\styling\InputTextStyle.hpp">
       <Filter>Headers\Controls\Styling</Filter>
     </ClInclude>
+    <ClInclude Include="src\ui\controls\NumericUpDown.hpp">
+      <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\components\SecondaryButtonComponent.hpp">
+      <Filter>Headers\Controls\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\ui\controls\Slider.inl">
+      <Filter>Source\Controls\Controls</Filter>
+    </None>
+    <None Include="src\ui\controls\NumericUpDown.inl">
       <Filter>Source\Controls\Controls</Filter>
     </None>
   </ItemGroup>
