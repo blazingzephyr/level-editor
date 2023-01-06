@@ -64,8 +64,9 @@ public:
 	/// \param spriteFocused Sub-rectangle of the texture to assign to the focused sprite
 	/// \param textTheme     Text theme
 	/// \param inputStyle    Input style
+	/// \param onTextUpdated Event raised when input string changes
 	/// \param string        String to assign to the text
-	/// \param enable        Enable this control
+	/// \param enabled       Enable this control
 	/// 
 	////////////////////////////////////////////////////////////
 	InputControl(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture,
