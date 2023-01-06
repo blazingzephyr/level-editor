@@ -84,6 +84,9 @@
     <ClCompile Include="src\ui\components\LocalizableTextComponent.cpp">
       <Filter>Source\Controls\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\controls\InputControl.cpp">
+      <Filter>Source\Controls\Controls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\interfaces\Updatable.hpp">
@@ -124,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="src\ui\controls\Slider.hpp">
       <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\controls\InputControl.hpp">
+      <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\styling\InputTextStyle.hpp">
+      <Filter>Headers\Controls\Styling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

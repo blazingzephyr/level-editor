@@ -25,6 +25,7 @@
     <ClCompile Include="src\ui\controls\Button.cpp" />
     <ClCompile Include="src\ui\controls\CheckBox.cpp" />
     <ClCompile Include="src\ui\controls\ComboBox.cpp" />
+    <ClCompile Include="src\ui\controls\InputControl.cpp" />
     <ClCompile Include="src\ui\interfaces\Control.cpp" />
     <ClCompile Include="src\ui\interfaces\SpriteBasedControl.cpp" />
     <ClCompile Include="src\ui\interfaces\TextBasedControl.cpp" />
@@ -40,11 +41,13 @@
     <ClInclude Include="src\ui\controls\Button.hpp" />
     <ClInclude Include="src\ui\controls\CheckBox.hpp" />
     <ClInclude Include="src\ui\controls\ComboBox.hpp" />
+    <ClInclude Include="src\ui\controls\InputControl.hpp" />
     <ClInclude Include="src\ui\controls\Slider.hpp" />
     <ClInclude Include="src\ui\interfaces\Control.hpp" />
     <ClInclude Include="src\ui\interfaces\SpriteBasedControl.hpp" />
     <ClInclude Include="src\ui\interfaces\TextBasedControl.hpp" />
     <ClInclude Include="src\ui\interfaces\Updatable.hpp" />
+    <ClInclude Include="src\ui\styling\InputTextStyle.hpp" />
     <ClInclude Include="src\ui\styling\TextTheme.hpp" />
     <ClInclude Include="src\utility\Config.hpp" />
   </ItemGroup>
