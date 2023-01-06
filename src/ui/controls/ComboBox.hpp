@@ -74,7 +74,8 @@ public:
 	////////////////////////////////////////////////////////////
 	ComboBox(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Vector2f& buttonSize, const sf::Texture& texture,
 	const sf::IntRect& spriteDefault, const sf::IntRect& spriteActive, const TextStyle* style, const TextTheme* theme,
-	const Strings* strings, const Items& items, size_t index, int scrollTime, Event1<ComboBox, size_t> onItemChanged, bool enabled = true);
+	const Strings* strings, const Items& items, size_t index, int scrollTime,
+	Event1<ComboBox, size_t> onItemChanged = [](ComboBox&, size_t) {}, bool enabled = true);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Selected item

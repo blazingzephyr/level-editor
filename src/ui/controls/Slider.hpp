@@ -76,8 +76,8 @@ public:
 	////////////////////////////////////////////////////////////
 	Slider(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Vector2f& thumbSize, const sf::Texture& texture,
 	const sf::IntRect& spriteDefault, const sf::IntRect& spriteActive, const sf::IntRect& thumb, bool isVertical,
-	T min, T max, T value, float scrollMultiplier = 1.f, Event1<Slider<T>, T> onValueChanged = Event1<Slider<T>, T>(),
-	Event1<Slider<T>, T> onMaxValueChanged = Event1<Slider<T>, T>(), bool enabled = true);
+	T min, T max, T value, float scrollMultiplier = 1.f, Event1<Slider<T>, T> onValueChanged = [](Slider<T>&, T) {},
+	Event1<Slider<T>, T> onMaxValueChanged = [](Slider<T>&, T) {}, bool enabled = true);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Get slider's value

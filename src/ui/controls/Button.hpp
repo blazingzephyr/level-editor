@@ -70,7 +70,7 @@ public:
 	////////////////////////////////////////////////////////////
 	Button(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::IntRect& spriteDefault,
 	const sf::IntRect& spriteActive, const TextTheme* textTheme, const Strings* strings, const sf::String& string,
-	Event0<Button> onReleasedControl = Event0<Button>(), Event0<Button> onHold = Event0<Button>(), bool enabled = true);
+	Event0<Button> onReleasedControl = [](Button&) {}, Event0<Button> onHold = [](Button&) {}, bool enabled = true);
 
 private:
 
