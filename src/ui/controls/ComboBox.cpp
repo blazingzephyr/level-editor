@@ -165,7 +165,7 @@ void ComboBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 
 ////////////////////////////////////////////////////////////
-void ComboBox::onReleasedButton(uint8_t summand)
+void ComboBox::onReleasedButton(int8_t summand)
 {
 	this->m_elapsed = m_clock.getElapsedTime().asMilliseconds();
 	if (!m_holdingButton || this->m_elapsed >= this->m_scrollTime)
@@ -178,7 +178,7 @@ void ComboBox::onReleasedButton(uint8_t summand)
 
 
 ////////////////////////////////////////////////////////////
-void ComboBox::onHoldButton(uint8_t summand)
+void ComboBox::onHoldButton(int8_t summand)
 {	
 	this->m_holdingButton = true;
 	this->m_elapsed = m_clock.getElapsedTime().asMilliseconds();

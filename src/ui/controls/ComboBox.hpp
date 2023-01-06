@@ -148,7 +148,7 @@ private:
 	/// \param summand 1 to move right, -1 to move left
 	/// 
 	////////////////////////////////////////////////////////////
-	void onReleasedButton(uint8_t summand);
+	void onReleasedButton(int8_t summand);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Event raised when a child button is held
@@ -156,7 +156,7 @@ private:
 	/// \param summand 1 to move right, -1 to move left
 	/// 
 	////////////////////////////////////////////////////////////
-	void onHoldButton(uint8_t summand);
+	void onHoldButton(int8_t summand);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Moves index left or right
