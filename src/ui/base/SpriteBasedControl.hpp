@@ -32,6 +32,7 @@
 ////////////////////////////////////////////////////////////
 #include "Control.hpp"
 #include "../components/SpriteComponent.hpp"
+#include "../styling/SpriteBasedControlTheme.hpp"
 #include <SFML/Graphics/Shader.hpp>
 
 
@@ -65,7 +66,7 @@ public:
 	/// \param enable        Enable this control
 	/// 
 	////////////////////////////////////////////////////////////
-	SpriteBasedControl(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture,
+	SpriteBasedControl(const sf::Vector2f& position, const sf::Vector2f& size, const SpriteBasedControlTheme* theme,
 	const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt, bool useAlt, bool enabled);
 
 	////////////////////////////////////////////////////////////
@@ -129,8 +130,9 @@ protected:
 	////////////////////////////////////////////////////////////
 	// Member data
 	////////////////////////////////////////////////////////////
-	SpriteComponent m_sprite;   //!< Sprite drawn in SpriteBasedControl::draw
-	const sf::Shader* m_shader; //!< Shader applied to sprite in SpriteBasedControl::draw
+	SpriteComponent m_sprite;                //!< Sprite drawn in SpriteBasedControl::draw
+	const SpriteBasedControlTheme* m_theme;  //!< Set of read-only parameters shared between controls
+	const sf::Shader* m_shader;              //!< Shader applied to sprite in SpriteBasedControl::draw
 };
 
 } //namespace le

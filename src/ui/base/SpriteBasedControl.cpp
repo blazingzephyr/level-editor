@@ -42,12 +42,13 @@ m_sprite()
 
 
 ////////////////////////////////////////////////////////////
-SpriteBasedControl::SpriteBasedControl(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture,
-const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt, bool useAlt, bool enabled) :
+SpriteBasedControl::SpriteBasedControl(const sf::Vector2f& position, const sf::Vector2f& size,
+const SpriteBasedControlTheme* theme, const sf::IntRect& spriteDefault, const sf::IntRect& spriteAlt,
+bool useAlt, bool enabled) :
 
 Control::Control(position, size, enabled),
 m_shader(nullptr),
-m_sprite(sf::Vector2f(), texture, spriteDefault, spriteAlt, useAlt)
+m_sprite(sf::Vector2f(), theme ? *theme->m_texture : sf::Texture(), spriteDefault, spriteAlt, useAlt)
 {
 }
 
@@ -87,16 +88,20 @@ void SpriteBasedControl::onReleasedControl(sf::Mouse::Button button, sf::Vector2
 ////////////////////////////////////////////////////////////
 void SpriteBasedControl::onEntered(sf::Vector2f worldPos)
 {
-	this->m_shader = this->m_enabled ? nullptr_t() : nullptr_t();
-	printf("SpriteBasedControl::onEntered IS NOT IMPLEMENTED\n");
+	if (this->m_theme)
+	{
+		this->m_shader = this->m_enabled ? this->m_theme->m_hovering : this->m_theme->m_disabledHovering;
+	}
 }
 
 
 ////////////////////////////////////////////////////////////
 void SpriteBasedControl::onLeft(sf::Vector2f worldPos)
 {
-	this->m_shader = this->m_enabled ? nullptr : nullptr_t();
-	printf("SpriteBasedControl::onLeft IS NOT IMPLEMENTED\n");
+	if (this->m_theme)
+	{
+		this->m_shader = this->m_enabled ? nullptr : this->m_theme->m_disabled;
+	}
 }
 
 } //namespace le
