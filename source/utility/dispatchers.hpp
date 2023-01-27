@@ -23,6 +23,77 @@
 #include <string>
 #include <vector>
 
+const minijson::dispatcher vector2f_dispatcher
+{
+	minijson::handlers::handler("x",	[](sf::Vector2f& vector, minijson::value v) { v.to(vector.x); }),
+	minijson::handlers::handler("y",	[](sf::Vector2f& vector, minijson::value v) { v.to(vector.y); }),
+	minijson::handlers::ignore_any_handler {}
+};
+
+const minijson::dispatcher vector2u_dispatcher
+{
+	minijson::handlers::handler("x",	[](sf::Vector2u& vector, minijson::value v) { v.to(vector.x); }),
+	minijson::handlers::handler("y",	[](sf::Vector2u& vector, minijson::value v) { v.to(vector.y); }),
+	minijson::handlers::ignore_any_handler {}
+};
+
+const minijson::dispatcher intrect_dispatcher
+{
+	minijson::handlers::handler("left",		[](sf::IntRect& rect, minijson::value v) { v.to(rect.left); }),
+	minijson::handlers::handler("top",		[](sf::IntRect& rect, minijson::value v) { v.to(rect.top); }),
+	minijson::handlers::handler("width",	[](sf::IntRect& rect, minijson::value v) { v.to(rect.width); }),
+	minijson::handlers::handler("height",	[](sf::IntRect& rect, minijson::value v) { v.to(rect.height); }),
+	minijson::handlers::ignore_any_handler {}
+};
+
+const minijson::dispatcher color_dispatcher
+{
+	minijson::handlers::handler("r",			[](sf::Color& color, minijson::value v) { v.to(color.r); }),
+	minijson::handlers::handler("g",			[](sf::Color& color, minijson::value v) { v.to(color.g); }),
+	minijson::handlers::handler("b",			[](sf::Color& color, minijson::value v) { v.to(color.b); }),
+	minijson::handlers::optional_handler("a",	[](sf::Color& color, minijson::value v) { v.to(color.a); }),
+	minijson::handlers::ignore_any_handler {}
+};
+
+const minijson::dispatcher background_movement_dispatcher
+{
+	minijson::handlers::handler("enabled",			[](bool& enabled, sf::Vector2f&, sf::Vector2f&, sf::Vector2f&, minijson::value v) { v.to(enabled); }),
+	minijson::handlers::optional_handler("min",		[](bool&, sf::Vector2f& min, sf::Vector2f&, sf::Vector2f&, minijson::value, auto& context) { vector2f_dispatcher.run(context, min); }),
+	minijson::handlers::optional_handler("max",		[](bool&, sf::Vector2f&, sf::Vector2f& max, sf::Vector2f&, minijson::value, auto& context) { vector2f_dispatcher.run(context, max); }),
+	minijson::handlers::optional_handler("step",	[](bool&, sf::Vector2f&, sf::Vector2f&, sf::Vector2f& step, minijson::value, auto& context) { vector2f_dispatcher.run(context, step); }),
+	minijson::handlers::ignore_any_handler {}
+};
+
+const minijson::dispatcher vertex_dispatcher
+{
+	minijson::handlers::handler("x",		[](sf::Vector2f& position, int&, minijson::value v) { v.to(position.x); }),
+	minijson::handlers::handler("y",		[](sf::Vector2f& position, int&, minijson::value v) { v.to(position.y); }),
+	minijson::handlers::handler("scale",	[](sf::Vector2f&, int& scale, minijson::value v) { v.to(scale); }),
+	minijson::handlers::ignore_any_handler {}
+};
+
+const minijson::dispatcher action_dispatcher
+{
+	minijson::handlers::handler("actionType",	[](sf::String& action_type, std::vector<sf::String>&, minijson::value v) { action_type = v.raw().data(); }),
+
+	minijson::handlers::handler(
+		"arguments",
+		[](sf::String&, std::vector<sf::String>& arguments, minijson::value, auto& context)
+		{
+			std::vector<sf::String> array_elements = std::vector<sf::String>();
+			minijson::parse_array(context, [&](minijson::value v)
+				{
+					array_elements.push_back(toWide(v.raw()));
+				}
+			);
+
+			arguments = array_elements;
+		}
+	),
+
+	minijson::handlers::ignore_any_handler {}
+};
+
 const minijson::dispatcher settings_dispatcher
 {
 	minijson::handlers::handler("windowSize",				[](ApplicationSettings& settings, minijson::value v) { v.to(settings.window_size); }),
@@ -77,7 +148,7 @@ const minijson::dispatcher theme_dispatcher
 			v.to(theme.toggle_animations);
 		}
 	),
-	
+
 	minijson::handlers::handler(
 		"shaders",
 		[](EditorTheme& theme, minijson::value, auto& context)
@@ -160,10 +231,10 @@ const minijson::dispatcher theme_dispatcher
 			);
 		}
 	),
-	
+
 	minijson::handlers::handler(
 		"textThemes",
-		[](EditorTheme& theme, minijson::value, auto& context) 
+		[](EditorTheme& theme, minijson::value, auto& context)
 		{
 			parse_object(context, [&](std::string_view name, minijson::value, auto& inner_context)
 				{
@@ -174,7 +245,7 @@ const minijson::dispatcher theme_dispatcher
 			);
 		}
 	),
-			
+
 	minijson::handlers::handler(
 		"inputControlThemes",
 		[](EditorTheme& theme, minijson::value, auto& context)
@@ -229,11 +300,11 @@ const minijson::dispatcher control_theme_dispatcher
 const minijson::dispatcher text_theme_dispatcher
 {
 	minijson::handlers::handler(
-		"horizontalAlignment", 
+		"horizontalAlignment",
 		[](EditorTheme&, TextTheme& textTheme, minijson::value v)
 		{
 			static std::unordered_map<std::string, TextTheme::TextHorizontalAlignment> const table
-				=	{ 
+				= {
 						{ "Center", TextTheme::TextHorizontalAlignment::Center },
 						{ "Left", TextTheme::TextHorizontalAlignment::Left },
 						{ "Right", TextTheme::TextHorizontalAlignment::Right }
@@ -249,7 +320,7 @@ const minijson::dispatcher text_theme_dispatcher
 		[](EditorTheme&, TextTheme& textTheme, minijson::value v)
 		{
 			static std::unordered_map<std::string, TextTheme::TextVerticalAlignment> const table
-				=	{
+				= {
 						{ "Center", TextTheme::TextVerticalAlignment::Center },
 						{ "Top", TextTheme::TextVerticalAlignment::Top },
 						{ "Bottom", TextTheme::TextVerticalAlignment::Bottom }
@@ -260,29 +331,20 @@ const minijson::dispatcher text_theme_dispatcher
 		}
 	),
 
-	minijson::handlers::handler("font",						[](EditorTheme& theme, TextTheme& textTheme, minijson::value v)			{ textTheme.font = theme.fonts[toWide(v.raw())]; }),
-	minijson::handlers::handler("fillDefaultColor",			[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.fill_default_color); }),
-	minijson::handlers::handler("fillHoveringColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.fill_hovering_color); }),
-	minijson::handlers::handler("fillHoldingColor",			[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.fill_holding_color); }),
-	minijson::handlers::handler("fillDisabledColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.fill_disabled_color); }),
-	minijson::handlers::handler("outlineDefaultColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.outline_default_color); }),
-	minijson::handlers::handler("outlineHoveringColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.outline_hovering_color); }),
-	minijson::handlers::handler("outlineHoldingColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.outline_holding_color); }),
-	minijson::handlers::handler("outlineDisabledColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx)	{ color_dispatcher.run(ctx, textTheme.outline_disabled_color); }),
-	minijson::handlers::handler("characterSize",			[](EditorTheme&, TextTheme& textTheme, minijson::value v)				{ v.to(textTheme.character_size); }),
-	minijson::handlers::handler("letterSpacing",			[](EditorTheme&, TextTheme& textTheme, minijson::value v)				{ v.to(textTheme.letter_spacing); }),
-	minijson::handlers::handler("lineSpacing",				[](EditorTheme&, TextTheme& textTheme, minijson::value v)				{ v.to(textTheme.line_spacing); }),
-	minijson::handlers::handler("outlineThickness",			[](EditorTheme&, TextTheme& textTheme, minijson::value v)				{ v.to(textTheme.outline_thickness); }),
-	minijson::handlers::handler("style",					[](EditorTheme&, TextTheme& textTheme, minijson::value v)				{ v.to(textTheme.style); }),
-	minijson::handlers::ignore_any_handler {}
-};
-
-const minijson::dispatcher color_dispatcher
-{
-	minijson::handlers::handler("r",			[](sf::Color& color, minijson::value v) { v.to(color.r); }),
-	minijson::handlers::handler("g",			[](sf::Color& color, minijson::value v) { v.to(color.g); }),
-	minijson::handlers::handler("b",			[](sf::Color& color, minijson::value v) { v.to(color.b); }),
-	minijson::handlers::optional_handler("a",	[](sf::Color& color, minijson::value v) { v.to(color.a); }),
+	minijson::handlers::handler("font",						[](EditorTheme& theme, TextTheme& textTheme, minijson::value v) { textTheme.font = theme.fonts[toWide(v.raw())]; }),
+	minijson::handlers::handler("fillDefaultColor",			[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.fill_default_color); }),
+	minijson::handlers::handler("fillHoveringColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.fill_hovering_color); }),
+	minijson::handlers::handler("fillHoldingColor",			[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.fill_holding_color); }),
+	minijson::handlers::handler("fillDisabledColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.fill_disabled_color); }),
+	minijson::handlers::handler("outlineDefaultColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.outline_default_color); }),
+	minijson::handlers::handler("outlineHoveringColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.outline_hovering_color); }),
+	minijson::handlers::handler("outlineHoldingColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.outline_holding_color); }),
+	minijson::handlers::handler("outlineDisabledColor",		[](EditorTheme&, TextTheme& textTheme, minijson::value v, auto& ctx) { color_dispatcher.run(ctx, textTheme.outline_disabled_color); }),
+	minijson::handlers::handler("characterSize",			[](EditorTheme&, TextTheme& textTheme, minijson::value v) { v.to(textTheme.character_size); }),
+	minijson::handlers::handler("letterSpacing",			[](EditorTheme&, TextTheme& textTheme, minijson::value v) { v.to(textTheme.letter_spacing); }),
+	minijson::handlers::handler("lineSpacing",				[](EditorTheme&, TextTheme& textTheme, minijson::value v) { v.to(textTheme.line_spacing); }),
+	minijson::handlers::handler("outlineThickness",			[](EditorTheme&, TextTheme& textTheme, minijson::value v) { v.to(textTheme.outline_thickness); }),
+	minijson::handlers::handler("style",					[](EditorTheme&, TextTheme& textTheme, minijson::value v) { v.to(textTheme.style); }),
 	minijson::handlers::ignore_any_handler {}
 };
 
@@ -311,12 +373,12 @@ inline void setCursor(sf::Cursor* cursor, minijson::value v)
 
 const minijson::dispatcher input_control_theme_dispatcher
 {
-	minijson::handlers::handler("mouseCursorDefault",	[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value v)				{ setCursor(input_control_theme.mouse_cursor_default, v); }),
-	minijson::handlers::handler("mouseCursorText",		[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value v)				{ setCursor(input_control_theme.mouse_cursor_text, v); }),
-	minijson::handlers::handler("cursorWidth",			[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value v)				{ v.to(input_control_theme.cursor_width); }),
-	minijson::handlers::handler("cursorColor",			[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value, auto& ctx)	{ color_dispatcher.run(ctx, input_control_theme.cursor_color); }),
-	minijson::handlers::handler("selectionColor",		[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value, auto& ctx)	{ color_dispatcher.run(ctx, input_control_theme.selection_color); }),
-	minijson::handlers::optional_handler("inputSound",	[](EditorTheme& theme, InputControlTheme& input_control_theme, minijson::value v)		{ input_control_theme.input_sound = toWide(v.raw()); }),
+	minijson::handlers::handler("mouseCursorDefault",	[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value v) { setCursor(input_control_theme.mouse_cursor_default, v); }),
+	minijson::handlers::handler("mouseCursorText",		[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value v) { setCursor(input_control_theme.mouse_cursor_text, v); }),
+	minijson::handlers::handler("cursorWidth",			[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value v) { v.to(input_control_theme.cursor_width); }),
+	minijson::handlers::handler("cursorColor",			[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value, auto& ctx) { color_dispatcher.run(ctx, input_control_theme.cursor_color); }),
+	minijson::handlers::handler("selectionColor",		[](EditorTheme&, InputControlTheme& input_control_theme, minijson::value, auto& ctx) { color_dispatcher.run(ctx, input_control_theme.selection_color); }),
+	minijson::handlers::optional_handler("inputSound",	[](EditorTheme& theme, InputControlTheme& input_control_theme, minijson::value v) { input_control_theme.input_sound = toWide(v.raw()); }),
 	minijson::handlers::ignore_any_handler {}
 };
 
@@ -359,7 +421,7 @@ const minijson::dispatcher layout_dispatcher
 const minijson::dispatcher scene_dispatcher
 {
 	minijson::handlers::handler(
-		"background",	
+		"background",
 		[](Application&, SoundHandler&, ApplicationSettings&, EditorTheme& theme, sf::RenderWindow& window, sf::Vector2u, Scene& scene, std::map<sf::String, sf::String>*, minijson::value v)
 		{
 			sf::String key = toWide(v.raw());
@@ -398,7 +460,7 @@ const minijson::dispatcher scene_dispatcher
 			parse_object(context, [&](std::string_view name, minijson::value, auto& inner_context)
 				{
 					sf::String key = toWide(name);
-					ControlConstructor constructor = ControlConstructor 
+					ControlConstructor constructor = ControlConstructor
 					{
 						.window = &window,
 						.intended_resolution = intended_resolution,
@@ -419,60 +481,51 @@ const minijson::dispatcher scene_dispatcher
 	minijson::handlers::ignore_any_handler {}
 };
 
-const minijson::dispatcher background_movement_dispatcher
-{
-	minijson::handlers::handler("enabled",			[](bool& enabled, sf::Vector2f&, sf::Vector2f&, sf::Vector2f&, minijson::value v)			{ v.to(enabled); }),
-	minijson::handlers::optional_handler("min",		[](bool&, sf::Vector2f& min, sf::Vector2f&, sf::Vector2f&, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, min); }),
-	minijson::handlers::optional_handler("max",		[](bool&, sf::Vector2f&, sf::Vector2f& max, sf::Vector2f&, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, max); }),
-	minijson::handlers::optional_handler("step",	[](bool&, sf::Vector2f&, sf::Vector2f&, sf::Vector2f& step, minijson::value, auto& context) { vector2f_dispatcher.run(context, step); }),
-	minijson::handlers::ignore_any_handler {}
-};
-
 const minijson::dispatcher control_dispatcher
 {
-	minijson::handlers::handler("controlType",							[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ constructor.control_type = v.raw().data(); }),
-	minijson::handlers::handler("theme",								[](Application&, EditorTheme& theme, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)			{ constructor.theme = &theme.control_themes[toWide(v.raw())]; }),
-	minijson::handlers::handler("position",								[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.position); }),
-	minijson::handlers::handler("size",									[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.size); }),
-	minijson::handlers::optional_handler("visible",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.visible); }),
-	minijson::handlers::optional_handler("enabled",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.enabled); }),
-	minijson::handlers::optional_handler("bgRect",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.bg_rect); }),
-	minijson::handlers::optional_handler("bgActiveRect",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.bg_active_rect); }),
-	minijson::handlers::optional_handler("textTheme",					[](Application&, EditorTheme& theme, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)			{ constructor.text_theme = &theme.text_themes[toWide(v.raw())]; }),
-	minijson::handlers::optional_handler("inputControlTheme",			[](Application&, EditorTheme& theme, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)			{ constructor.input_control_theme = &theme.input_control_themes[toWide(v.raw())]; }),
-	minijson::handlers::optional_handler("checked",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.checked); }),
-	minijson::handlers::optional_handler("text",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ constructor.text = v.raw().data(); }),
-	minijson::handlers::optional_handler("buttonSize",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.button_size); }),
-	minijson::handlers::optional_handler("firstButtonBgRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.first_button_bg_rect); }),
-	minijson::handlers::optional_handler("firstButtonBgFocusedRect",	[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.first_button_bg_focused_rect); }),
-	minijson::handlers::optional_handler("secondButtonBgRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.second_button_bg_rect); }),
-	minijson::handlers::optional_handler("secondButtonBgFocusedRect",	[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.second_button_bg_focused_rect); }),
-	minijson::handlers::optional_handler("min",							[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.min); }),
-	minijson::handlers::optional_handler("max",							[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.max); }),
-	minijson::handlers::optional_handler("step",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.step); }),
-	minijson::handlers::optional_handler("value",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.value); }),
-	minijson::handlers::optional_handler("buttonOffset",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.button_offset); }),
-	minijson::handlers::optional_handler("index",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.index); }),
-	minijson::handlers::optional_handler("scrollTime",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.scroll_time); }),
-	minijson::handlers::optional_handler("thumbSize",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.thumb_size); }),
-	minijson::handlers::optional_handler("thumbRect",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>* ,ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.thumb_rect); }),
-	minijson::handlers::optional_handler("vertical",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.vertical); }),
-	minijson::handlers::optional_handler("scrollMultiplier",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.scroll_multiplier); }),
-	minijson::handlers::optional_handler("createButtonPosition",		[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.create_button_position); }),
-	minijson::handlers::optional_handler("createButtonSize",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.create_button_size); }),
-	minijson::handlers::optional_handler("createButtonBgRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.create_button_bg); }),
-	minijson::handlers::optional_handler("createButtonBgFocusedRect",	[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.create_button_bg_focused); }),
-	minijson::handlers::optional_handler("createButtonText",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ constructor.create_button_text = v.raw().data(); }),
-	minijson::handlers::optional_handler("sliderPosition",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.slider_position); }),
-	minijson::handlers::optional_handler("sliderSize",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.slider_size); }),
-	minijson::handlers::optional_handler("sliderBgRect",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.slider_bg); }),
-	minijson::handlers::optional_handler("sliderBgFocusedRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.slider_bg_focused); }),
-	minijson::handlers::optional_handler("sliderThumbSize",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ vector2f_dispatcher.run(context, constructor.slider_thumb_size); }),
-	minijson::handlers::optional_handler("sliderThumb",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)	{ intrect_dispatcher.run(context, constructor.slider_thumb); }),
-	minijson::handlers::optional_handler("rowOffset",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.row_offset); }),
-	minijson::handlers::optional_handler("rotationAngle",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.rotation_angle); }),
-	minijson::handlers::optional_handler("minYPosition",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v)				{ v.to(constructor.min_y_position); }),
-	
+	minijson::handlers::handler("controlType",							[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { constructor.control_type = v.raw().data(); }),
+	minijson::handlers::handler("theme",								[](Application&, EditorTheme& theme, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { constructor.theme = &theme.control_themes[toWide(v.raw())]; }),
+	minijson::handlers::handler("position",								[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.position); }),
+	minijson::handlers::handler("size",									[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.size); }),
+	minijson::handlers::optional_handler("visible",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.visible); }),
+	minijson::handlers::optional_handler("enabled",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.enabled); }),
+	minijson::handlers::optional_handler("bgRect",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.bg_rect); }),
+	minijson::handlers::optional_handler("bgActiveRect",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.bg_active_rect); }),
+	minijson::handlers::optional_handler("textTheme",					[](Application&, EditorTheme& theme, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { constructor.text_theme = &theme.text_themes[toWide(v.raw())]; }),
+	minijson::handlers::optional_handler("inputControlTheme",			[](Application&, EditorTheme& theme, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { constructor.input_control_theme = &theme.input_control_themes[toWide(v.raw())]; }),
+	minijson::handlers::optional_handler("checked",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.checked); }),
+	minijson::handlers::optional_handler("text",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { constructor.text = v.raw().data(); }),
+	minijson::handlers::optional_handler("buttonSize",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.button_size); }),
+	minijson::handlers::optional_handler("firstButtonBgRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.first_button_bg_rect); }),
+	minijson::handlers::optional_handler("firstButtonBgFocusedRect",	[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.first_button_bg_focused_rect); }),
+	minijson::handlers::optional_handler("secondButtonBgRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.second_button_bg_rect); }),
+	minijson::handlers::optional_handler("secondButtonBgFocusedRect",	[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.second_button_bg_focused_rect); }),
+	minijson::handlers::optional_handler("min",							[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.min); }),
+	minijson::handlers::optional_handler("max",							[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.max); }),
+	minijson::handlers::optional_handler("step",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.step); }),
+	minijson::handlers::optional_handler("value",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.value); }),
+	minijson::handlers::optional_handler("buttonOffset",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.button_offset); }),
+	minijson::handlers::optional_handler("index",						[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.index); }),
+	minijson::handlers::optional_handler("scrollTime",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.scroll_time); }),
+	minijson::handlers::optional_handler("thumbSize",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.thumb_size); }),
+	minijson::handlers::optional_handler("thumbRect",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>* ,ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.thumb_rect); }),
+	minijson::handlers::optional_handler("vertical",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.vertical); }),
+	minijson::handlers::optional_handler("scrollMultiplier",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.scroll_multiplier); }),
+	minijson::handlers::optional_handler("createButtonPosition",		[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.create_button_position); }),
+	minijson::handlers::optional_handler("createButtonSize",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.create_button_size); }),
+	minijson::handlers::optional_handler("createButtonBgRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.create_button_bg); }),
+	minijson::handlers::optional_handler("createButtonBgFocusedRect",	[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.create_button_bg_focused); }),
+	minijson::handlers::optional_handler("createButtonText",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { constructor.create_button_text = v.raw().data(); }),
+	minijson::handlers::optional_handler("sliderPosition",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.slider_position); }),
+	minijson::handlers::optional_handler("sliderSize",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.slider_size); }),
+	minijson::handlers::optional_handler("sliderBgRect",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.slider_bg); }),
+	minijson::handlers::optional_handler("sliderBgFocusedRect",			[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.slider_bg_focused); }),
+	minijson::handlers::optional_handler("sliderThumbSize",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { vector2f_dispatcher.run(context, constructor.slider_thumb_size); }),
+	minijson::handlers::optional_handler("sliderThumb",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context) { intrect_dispatcher.run(context, constructor.slider_thumb); }),
+	minijson::handlers::optional_handler("rowOffset",					[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.row_offset); }),
+	minijson::handlers::optional_handler("rotationAngle",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.rotation_angle); }),
+	minijson::handlers::optional_handler("minYPosition",				[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value v) { v.to(constructor.min_y_position); }),
+
 	minijson::handlers::optional_handler(
 		"rowConstructors",
 		[](Application& application, EditorTheme& theme, sf::RenderWindow& window, Scene& scene, std::map<sf::String, sf::String>* strings, ControlConstructor& constructor, minijson::value, auto& context)
@@ -480,7 +533,7 @@ const minijson::dispatcher control_dispatcher
 			std::vector<ControlConstructor> array_elements = std::vector<ControlConstructor>();
 			minijson::parse_array(context, [&](minijson::value, auto& context)
 				{
-					ControlConstructor constructor = ControlConstructor { .window = &window, .strings = strings };
+					ControlConstructor constructor = ControlConstructor {.window = &window, .strings = strings };
 					control_dispatcher.run(context, application, theme, window, scene, strings, constructor);
 					array_elements.push_back(constructor);
 				}
@@ -499,7 +552,7 @@ const minijson::dispatcher control_dispatcher
 			control_dispatcher.run(context, application, theme, window, scene, strings, *constructor.row_erase_button);
 		}
 	),
-	
+
 	minijson::handlers::optional_handler(
 		"items",
 		[](Application&, EditorTheme&, sf::RenderWindow&, Scene&, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)
@@ -519,7 +572,7 @@ const minijson::dispatcher control_dispatcher
 	minijson::handlers::optional_handler(
 		"action",
 		[](Application& application, EditorTheme&, sf::RenderWindow&, Scene& scene, std::map<sf::String, sf::String>*, ControlConstructor& constructor, minijson::value, auto& context)
-		{ 
+		{
 			sf::String action_type;
 			std::vector<sf::String> arguments;
 			action_dispatcher.run(context, action_type, arguments);
@@ -542,14 +595,14 @@ const minijson::dispatcher control_dispatcher
 					{
 						application.loadSettings(arguments);
 					}
-					else 
+					else
 					{
 						auto it = std::find(arguments.begin(), arguments.end(), "update_window");
 						if (it != arguments.end())
 						{
 							application.updateIfDirty();
 						}
-						
+
 						it = std::find(arguments.begin(), arguments.end(), "open_level");
 						if (it != arguments.end())
 						{
@@ -686,7 +739,7 @@ const minijson::dispatcher control_dispatcher
 					control->setEnabled(!enabled);
 				};
 				constructor.action_numeric = [&application, arguments](long double v) { application.getControl(arguments[0])->setEnabled(v > 1); };
-				constructor.action_boolean = [&application, arguments](bool v) 
+				constructor.action_boolean = [&application, arguments](bool v)
 				{
 					for (std::string argument : arguments)
 					{
@@ -719,59 +772,6 @@ const minijson::dispatcher control_dispatcher
 				constructor.action_boolean = [&](bool) {};
 				constructor.action_string = [&](sf::String) {};
 			}
-		}
-	),
-
-	minijson::handlers::ignore_any_handler {}
-};
-
-const minijson::dispatcher vector2f_dispatcher
-{
-	minijson::handlers::handler("x",	[](sf::Vector2f& vector, minijson::value v) { v.to(vector.x); }),
-	minijson::handlers::handler("y",	[](sf::Vector2f& vector, minijson::value v) { v.to(vector.y); }),
-	minijson::handlers::ignore_any_handler {}
-};
-
-const minijson::dispatcher vector2u_dispatcher
-{
-	minijson::handlers::handler("x",	[](sf::Vector2u& vector, minijson::value v) { v.to(vector.x); }),
-	minijson::handlers::handler("y",	[](sf::Vector2u& vector, minijson::value v) { v.to(vector.y); }),
-	minijson::handlers::ignore_any_handler {}
-};
-
-const minijson::dispatcher intrect_dispatcher
-{
-	minijson::handlers::handler("left",		[](sf::IntRect& rect, minijson::value v) { v.to(rect.left); }),
-	minijson::handlers::handler("top",		[](sf::IntRect& rect, minijson::value v) { v.to(rect.top); }),
-	minijson::handlers::handler("width",	[](sf::IntRect& rect, minijson::value v) { v.to(rect.width); }),
-	minijson::handlers::handler("height",	[](sf::IntRect& rect, minijson::value v) { v.to(rect.height); }),
-	minijson::handlers::ignore_any_handler {}
-};
-
-const minijson::dispatcher vertex_dispatcher
-{
-	minijson::handlers::handler("x",		[](sf::Vector2f& position, int&, minijson::value v) { v.to(position.x); }),
-	minijson::handlers::handler("y",		[](sf::Vector2f& position, int&, minijson::value v) { v.to(position.y); }),
-	minijson::handlers::handler("scale",	[](sf::Vector2f&, int& scale, minijson::value v) { v.to(scale); }),
-	minijson::handlers::ignore_any_handler {}
-};
-
-const minijson::dispatcher action_dispatcher
-{
-	minijson::handlers::handler("actionType",	[](sf::String& action_type, std::vector<sf::String>&, minijson::value v)	{ action_type = v.raw().data(); }),
-
-	minijson::handlers::handler(
-		"arguments",
-		[](sf::String&, std::vector<sf::String>& arguments, minijson::value, auto& context)
-		{
-			std::vector<sf::String> array_elements = std::vector<sf::String>();
-			minijson::parse_array(context, [&](minijson::value v)
-				{
-					array_elements.push_back(toWide(v.raw()));
-				}
-			);
-
-			arguments = array_elements;
 		}
 	),
 

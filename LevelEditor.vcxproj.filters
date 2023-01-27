@@ -810,8 +810,6 @@
   <ItemGroup>
     <Image Include="icon1.ico" />
     <Image Include="data\Resources\Textures\Default\Shared\Icon.png" />
-    <Image Include="..\..\..\Libraries\Downloads\Icon (1).ico" />
     <Image Include="LevelEditor.ico" />
-    <Image Include="..\..\..\Libraries\Downloads\Icon (2).ico" />
   </ItemGroup>
 </Project>
