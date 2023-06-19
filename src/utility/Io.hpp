@@ -24,29 +24,51 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef LEVEL_EDITOR_TABLE_HPP
-#define LEVEL_EDITOR_TABLE_HPP
+#ifndef LEVEL_EDITOR_IO_HPP
+#define LEVEL_EDITOR_IO_HPP
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "../base/SpriteBasedControl.hpp"
+#include <cassert>
+#include <format>
+#include <SFML/System/String.hpp>
 
 
 namespace le
 {
 ////////////////////////////////////////////////////////////
-/// \brief Text component, which can be localized
+/// \brief Read a file and return its content.
+///
+/// \param path Full path to the file. If the path does not exist,
+///			    the application crashes
+/// 
+/// \return Contents of the file
 ///
 ////////////////////////////////////////////////////////////
-class Table : public SpriteBasedControl
-{
-public:
+std::string readFile(std::string path);
+
+////////////////////////////////////////////////////////////
+/// \brief Write content to a file.
+///
+/// \param path    Full path to the file. If the path does not exist,
+///			       the application crashes
+/// 
+/// \param content Contents to write to the file
+///
+////////////////////////////////////////////////////////////
+void writeFile(std::string path, std::wstring content);
+
+////////////////////////////////////////////////////////////
+//void massert(bool expression, wchar_t* message)
+//{
+//	if (!expression)
+//	{
+//		_wassert(message, );
+//	}
+//}
+
+} // namespace le
 
 
-};
-
-} //namespace le
-
-
-#endif // LEVEL_EDITOR_TABLE_HPP
+#endif // LEVEL_EDITOR_IO_HPP

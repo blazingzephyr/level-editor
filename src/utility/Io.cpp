@@ -24,29 +24,67 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef LEVEL_EDITOR_TABLE_HPP
-#define LEVEL_EDITOR_TABLE_HPP
+#pragma warning(disable : 6386)
+#pragma warning(disable : 6387)
+#pragma warning(disable : 26815)
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "../base/SpriteBasedControl.hpp"
+#include "Io.hpp"
 
 
 namespace le
 {
 ////////////////////////////////////////////////////////////
-/// \brief Text component, which can be localized
-///
-////////////////////////////////////////////////////////////
-class Table : public SpriteBasedControl
+std::string readFile(std::string path)
 {
-public:
+	FILE* file = nullptr;
+	fopen_s(&file, path.c_str(), "rb");
+	//massert(file != nullptr, path.c_str() + " doesn't exist.");
+
+	fseek(file, 0, SEEK_END);
+	long size = ftell(file);
+	rewind(file);
+
+	char* charBuffer = new char[size + 1];
+	charBuffer[size] = '\0';
+	//massert(charBuffer != NULL, "Buffer has been allocated incorrectly.");
+
+	size_t result = fread(charBuffer, 1, size, file);
+	fclose(file);
+	//massert(result == size, "Unable to read from " + path.c_str());
+
+	std::string buffer = std::string(charBuffer);
+	delete[] charBuffer;
+	return buffer;
+}
 
 
-};
+////////////////////////////////////////////////////////////
+void writeFile(std::string path, std::wstring content)
+{
+	FILE* file = nullptr;
+	fopen_s(&file, path.c_str(), "w+");
+	printf("%i", fwide(file, 1));
 
-} //namespace le
+	if (file == 0)
+	{
+		assert(false);
+	}
+	
+
+	const wchar_t* buffer = (content + L'\0').c_str();
+	int result = fputws(buffer, file);
+
+	if (result == EOF)
+	{
+		std::perror("fputws()"); // POSIX requires that errno is set
+	}
+
+	fclose(file);
+}
 
 
-#endif // LEVEL_EDITOR_TABLE_HPP
+
+} // namespace le

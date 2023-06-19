@@ -25,14 +25,8 @@
     <Filter Include="Headers\Controls\Components">
       <UniqueIdentifier>{3c83ec71-d085-4ff9-8cff-3c0af33fb9f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Controls\Interfaces">
-      <UniqueIdentifier>{2eb361c4-dd4d-4136-9b10-1a904cb795ad}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Controls\Components">
       <UniqueIdentifier>{0b7f4fff-6585-4f00-a641-03785c622e59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Controls\Interfaces">
-      <UniqueIdentifier>{230b8ed1-0dcd-489c-a7c9-a93c9b8cd1b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Controls\Controls">
       <UniqueIdentifier>{836d7017-e6a4-4a85-9a7e-89eb7af6cf0a}</UniqueIdentifier>
@@ -48,6 +42,15 @@
     </Filter>
     <Filter Include="Headers\Controls\Styling">
       <UniqueIdentifier>{89597571-dc69-4a57-a538-08a137973235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Controls\Sound">
+      <UniqueIdentifier>{0b283429-dd1a-4098-8df2-d65b823df389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Controls\Base">
+      <UniqueIdentifier>{2eb361c4-dd4d-4136-9b10-1a904cb795ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Controls\Base">
+      <UniqueIdentifier>{230b8ed1-0dcd-489c-a7c9-a93c9b8cd1b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,17 +69,17 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\interfaces\Control.cpp">
-      <Filter>Source\Controls\Interfaces</Filter>
+    <ClCompile Include="src\ui\base\Control.cpp">
+      <Filter>Source\Controls\Base</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\interfaces\SpriteBasedControl.cpp">
-      <Filter>Source\Controls\Interfaces</Filter>
+    <ClCompile Include="src\ui\base\SpriteBasedControl.cpp">
+      <Filter>Source\Controls\Base</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\controls\Button.cpp">
       <Filter>Source\Controls\Controls</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\interfaces\TextBasedControl.cpp">
-      <Filter>Source\Controls\Interfaces</Filter>
+    <ClCompile Include="src\ui\base\TextBasedControl.cpp">
+      <Filter>Source\Controls\Base</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\controls\ComboBox.cpp">
       <Filter>Source\Controls\Controls</Filter>
@@ -90,10 +93,19 @@
     <ClCompile Include="src\ui\components\SecondaryButtonComponent.cpp">
       <Filter>Source\Controls\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\controls\Table.cpp">
+      <Filter>Source\Controls\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\Io.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\sound\SoundHandler.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ui\interfaces\Updatable.hpp">
-      <Filter>Headers\Controls\Interfaces</Filter>
+    <ClInclude Include="src\ui\base\Updatable.hpp">
+      <Filter>Headers\Controls\Base</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\components\SpriteComponent.hpp">
       <Filter>Headers\Controls\Components</Filter>
@@ -107,17 +119,17 @@
     <ClInclude Include="src\ui\controls\CheckBox.hpp">
       <Filter>Headers\Controls\Controls</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\interfaces\Control.hpp">
-      <Filter>Headers\Controls\Interfaces</Filter>
+    <ClInclude Include="src\ui\base\Control.hpp">
+      <Filter>Headers\Controls\Base</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\interfaces\SpriteBasedControl.hpp">
-      <Filter>Headers\Controls\Interfaces</Filter>
+    <ClInclude Include="src\ui\base\SpriteBasedControl.hpp">
+      <Filter>Headers\Controls\Base</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\controls\Button.hpp">
       <Filter>Headers\Controls\Controls</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\interfaces\TextBasedControl.hpp">
-      <Filter>Headers\Controls\Interfaces</Filter>
+    <ClInclude Include="src\ui\base\TextBasedControl.hpp">
+      <Filter>Headers\Controls\Base</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\styling\TextTheme.hpp">
       <Filter>Headers\Controls\Styling</Filter>
@@ -142,6 +154,21 @@
     </ClInclude>
     <ClInclude Include="src\ui\components\SecondaryButtonComponent.hpp">
       <Filter>Headers\Controls\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\controls\Table.hpp">
+      <Filter>Headers\Controls\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utility\Io.hpp">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlConstructionData.hpp">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\styling\SpriteBasedControlTheme.hpp">
+      <Filter>Headers\Controls\Styling</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\sound\SoundHandler.hpp">
+      <Filter>Headers\Controls\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

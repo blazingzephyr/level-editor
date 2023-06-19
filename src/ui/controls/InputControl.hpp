@@ -30,7 +30,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "../interfaces/TextBasedControl.hpp"
+#include "../base/TextBasedControl.hpp"
 #include "../styling/InputTextStyle.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Clipboard.hpp>

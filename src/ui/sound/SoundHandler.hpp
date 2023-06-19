@@ -24,29 +24,60 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef LEVEL_EDITOR_TABLE_HPP
-#define LEVEL_EDITOR_TABLE_HPP
+#ifndef LEVEL_EDITOR_SPRITE_BASED_CONTROL_HPP
+#define LEVEL_EDITOR_SPRITE_BASED_CONTROL_HPP
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "../base/SpriteBasedControl.hpp"
+#include <map>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/System/String.hpp>
 
 
 namespace le
 {
 ////////////////////////////////////////////////////////////
-/// \brief Text component, which can be localized
+/// \brief Abstract class, representing a user control with SpriteComponent
 ///
 ////////////////////////////////////////////////////////////
-class Table : public SpriteBasedControl
+class SoundHandler 
 {
 public:
 
+	////////////////////////////////////////////////////////////
+	/// \brief Default constructor
+	/// 
+	/// This constructor creates an empty SoundHandler
+	/// 
+	////////////////////////////////////////////////////////////
+	SoundHandler();
 
+	////////////////////////////////////////////////////////////
+	/// \brief Default constructor
+	/// 
+	/// \param position      Position set to control
+	/// \param size          Size of control
+	/// \param texture       Source texture
+	/// \param spriteDefault Sub-rectangle of the texture to assign to the default sprite
+	/// \param spriteAlt     Sub-rectangle of the texture to assign to the alternative sprite
+	/// \param useAlt        Use alternative sprite instead of the default one
+	/// \param enable        Enable this control
+	/// 
+	////////////////////////////////////////////////////////////
+	SoundHandler();
+
+
+	////////////////////////////////////////////////////////////
+	// Member data
+	////////////////////////////////////////////////////////////
+	std::map<sf::String, sf::SoundBuffer*> m_soundBuffers;
+	sf::Sound*                             m_source;
+
+		//!< Sprite drawn in SpriteBasedControl::draw
 };
 
 } //namespace le
 
 
-#endif // LEVEL_EDITOR_TABLE_HPP
+#endif // LEVEL_EDITOR_SPRITE_BASED_CONTROL_HPP

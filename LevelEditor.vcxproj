@@ -27,15 +27,19 @@
     <ClCompile Include="src\ui\controls\CheckBox.cpp" />
     <ClCompile Include="src\ui\controls\ComboBox.cpp" />
     <ClCompile Include="src\ui\controls\InputControl.cpp" />
-    <ClCompile Include="src\ui\interfaces\Control.cpp" />
-    <ClCompile Include="src\ui\interfaces\SpriteBasedControl.cpp" />
-    <ClCompile Include="src\ui\interfaces\TextBasedControl.cpp" />
+    <ClCompile Include="src\ui\controls\Table.cpp" />
+    <ClCompile Include="src\ui\base\Control.cpp" />
+    <ClCompile Include="src\ui\base\SpriteBasedControl.cpp" />
+    <ClCompile Include="src\ui\base\TextBasedControl.cpp" />
+    <ClCompile Include="src\ui\sound\SoundHandler.cpp" />
     <ClCompile Include="src\ui\styling\TextStyle.hpp">
       <FileType>CppHeader</FileType>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\utility\Io.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ControlConstructionData.hpp" />
     <ClInclude Include="src\ui\components\LocalizableTextComponent.hpp" />
     <ClInclude Include="src\ui\components\SecondaryButtonComponent.hpp" />
     <ClInclude Include="src\ui\components\SpriteComponent.hpp" />
@@ -46,13 +50,17 @@
     <ClInclude Include="src\ui\controls\InputControl.hpp" />
     <ClInclude Include="src\ui\controls\NumericUpDown.hpp" />
     <ClInclude Include="src\ui\controls\Slider.hpp" />
-    <ClInclude Include="src\ui\interfaces\Control.hpp" />
-    <ClInclude Include="src\ui\interfaces\SpriteBasedControl.hpp" />
-    <ClInclude Include="src\ui\interfaces\TextBasedControl.hpp" />
-    <ClInclude Include="src\ui\interfaces\Updatable.hpp" />
+    <ClInclude Include="src\ui\controls\Table.hpp" />
+    <ClInclude Include="src\ui\base\Control.hpp" />
+    <ClInclude Include="src\ui\base\SpriteBasedControl.hpp" />
+    <ClInclude Include="src\ui\base\TextBasedControl.hpp" />
+    <ClInclude Include="src\ui\base\Updatable.hpp" />
+    <ClInclude Include="src\ui\sound\SoundHandler.hpp" />
+    <ClInclude Include="src\ui\styling\SpriteBasedControlTheme.hpp" />
     <ClInclude Include="src\ui\styling\InputTextStyle.hpp" />
     <ClInclude Include="src\ui\styling\TextTheme.hpp" />
     <ClInclude Include="src\utility\Config.hpp" />
+    <ClInclude Include="src\utility\Io.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\ui\controls\NumericUpDown.inl">
@@ -75,7 +83,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -88,7 +96,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>

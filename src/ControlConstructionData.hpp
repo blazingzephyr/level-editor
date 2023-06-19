@@ -24,29 +24,33 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef LEVEL_EDITOR_TABLE_HPP
-#define LEVEL_EDITOR_TABLE_HPP
+#ifndef LEVEL_EDITOR_CONTROL_CONSTRUCTION_DATA_HPP
+#define LEVEL_EDITOR_CONTROL_CONSTRUCTION_DATA_HPP
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "../base/SpriteBasedControl.hpp"
+#include "TextStyle.hpp"
 
 
 namespace le
 {
 ////////////////////////////////////////////////////////////
-/// \brief Text component, which can be localized
+/// \brief Standard layout class for holding various data important for
+/// 	   control creation
 ///
 ////////////////////////////////////////////////////////////
-class Table : public SpriteBasedControl
+struct TextTheme
 {
-public:
-
-
+	////////////////////////////////////////////////////////////
+	// Member data
+	////////////////////////////////////////////////////////////
+	const TextStyle* m_default;  //!< Default text style
+	const TextStyle* m_disabled; //!< Disabled text style
+	const TextStyle* m_hovered;  //!< Hovered text style
+	const TextStyle* m_held;     //!< Style of the text while the mouse is held 
 };
 
-} //namespace le
+} // namespace le
 
-
-#endif // LEVEL_EDITOR_TABLE_HPP
+#endif // LEVEL_EDITOR_CONTROL_CONSTRUCTION_DATA_HPP
